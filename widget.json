@@ -18,6 +18,7 @@
     ],
     "assets": [
       "css/interface.css",
+      "vendor/jquery.jfeed.js",
       "js/interface.js"
     ]
   },
