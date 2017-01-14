@@ -1,0 +1,265 @@
+<form class="form-horizontal">
+
+  <header>
+    <p>Configure your RSS</p>
+    <a id="help_tip" href="#">Need help?</a>
+  </header>
+
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active" id="rss-layout-control"><a href="#rss-layout" aria-controls="rss-layout" role="tab" data-toggle="tab">RSS Layout</a></li>
+    <li role="presentation" class="disabled" id="rss-settings-control"><a href="#rss-settings" aria-controls="rss-settings" role="tab" data-toggle="tab">RSS Settings</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane tab-pane-content active" id="rss-layout">
+
+      <div class="titles">
+        <p>Choose a layout for your RSS feed</p>
+        <span>You can change this at any time.</span>
+      </div>
+
+      <div class="form-group" id="rss-layout-styles">
+          <div class="col-xs-6 layout-holder">
+              <input type="radio" name="rss_layout_style" id="rss_layout_style_left" value="thumb-left" class="hidden">
+              <label for="rss_layout_style_left">
+                  <span class="help-block">Thumbnail on the left</span>
+                  <div class="img-holder">
+                      <div class="screen"></div>
+                      <img class="img-responsive" src="/img/thumb-left-layout.jpg">
+                  </div>
+              </label>
+          </div>
+          <div class="col-xs-6 layout-holder">
+              <input type="radio" name="rss_layout_style" id="rss_layout_style_right" value="thumb-right" class="hidden">
+              <label for="rss_layout_style_right">
+                  <span class="help-block">Thumbnail on the right</span>
+                  <div class="img-holder">
+                      <div class="screen"></div>
+                      <img class="img-responsive" src="/img/thumb-right-layout.jpg">
+                  </div>
+              </label>
+          </div>
+          <div class="col-xs-6 layout-holder">
+              <input type="radio" name="rss_layout_style" id="rss_layout_style_none" value="text-only" class="hidden">
+              <label for="rss_layout_style_none">
+                  <span class="help-block">Text only</span>
+                  <div class="img-holder">
+                      <div class="screen"></div>
+                      <img class="img-responsive" src="/img/text-only-layout.jpg">
+                  </div>
+              </label>
+          </div>
+      </div>
+
+    </div>
+    <div role="tabpanel" class="tab-pane tab-pane-content" id="rss-settings">
+
+      <div class="titles">
+          <p>Configure your RSS feed</p>
+          <span>Paste a valid RSS feed URL.</span>
+      </div>
+
+      <div class="form-group" id="rss-url-holder">
+          <div class="col-xs-12 control-label">
+              <label for="saved-list-label">RSS feed URL</label>
+          </div>
+          <div class="col-xs-12">
+              <input type="text" class="form-control" name="rss-feed-url" id="rss-feed-url" placeholder="Enter a RSS feed URL">
+          </div>
+      </div>
+
+      <div id="rss-feed-settings">
+          <div class="loader">
+              <strong>Checking RSS...</strong>
+          </div>
+          <div class="rss-fail">
+              <strong>Ops...</strong>
+          </div>
+          <div id="rss-feed-settings-container">
+              <h2><small>Content settings</small></h2>
+              <div class="form-group" id="title-setting-holder">
+                  <label class="col-sm-12 control-label">Display titles</label>
+                  <div class="col-sm-12">
+                      <select class="form-control" name="title-clipping" id="title-clipping">
+                          <option value="none">Don't show</option>
+                          <option value="no-clip">Show entire title</option>
+                          <option value="clip-one">Clip to 1 line</option>
+                          <option value="clip-two" selected>Clip to 2 lines</option>
+                          <option value="clip-three">Clip to 3 lines</option>
+                          <option value="clip-four">Clip to 4 lines</option>
+                          <option value="clip-five">Clip to 5 lines</option>
+                          <option value="clip-six">Clip to 6 lines</option>
+                      </select>
+                  </div>
+              </div>
+
+              <div class="form-group" id="description-setting-holder">
+                  <label class="col-sm-12 control-label">Display descriptions</label>
+                  <div class="col-sm-12">
+                      <select class="form-control" name="description-clipping" id="description-clipping">
+                          <option value="none">Don't show</option>
+                          <option value="no-clip">Show entire description</option>
+                          <option value="clip-one">Clip to 1 line</option>
+                          <option value="clip-two" selected>Clip to 2 lines</option>
+                          <option value="clip-three">Clip to 3 lines</option>
+                          <option value="clip-four">Clip to 4 lines</option>
+                          <option value="clip-five">Clip to 5 lines</option>
+                          <option value="clip-six">Clip to 6 lines</option>
+                      </select>
+                  </div>
+              </div>
+
+              <h2><small>Design settings</small></h2>
+              <div class="form-group" id="rss-highlight">
+                  <div class="col-xs-12 control-label">
+                    <label for="highlight_style">Highlight unread entries</label>
+                  </div>
+                  <div class="col-xs-12" id="highlight-styles">
+                      <div class="col-xs-4 col-sm-no-padding text-center">
+                          <input type="radio" name="highlight_style" id="highlight-none" value="none" class="hidden">
+                          <label for="highlight-none">
+                              <span class="help-block"><span class="fa fa-square-o"></span><span class="fa fa-check-square-o"></span> None</span>
+                              <img class="img-responsive" src="/img/highlight-none.jpg">
+                          </label>
+                      </div>
+                      <div class="col-xs-4 col-sm-no-padding text-center">
+                          <input type="radio" name="highlight_style" id="highlight-circle" value="circle" class="hidden">
+                          <label for="highlight-circle">
+                              <span class="help-block"><span class="fa fa-square-o"></span><span class="fa fa-check-square-o"></span> Circle</span>
+                              <img class="img-responsive" src="/img/highlight-circle.jpg">
+                          </label>
+                      </div>
+                      <div class="col-xs-4 col-sm-no-padding text-center">
+                          <input type="radio" name="highlight_style" id="highlight-line" value="line" class="hidden" checked="">
+                          <label for="highlight-line">
+                              <span class="help-block"><span class="fa fa-square-o"></span><span class="fa fa-check-square-o"></span> Line</span>
+                              <img class="img-responsive" src="/img/highlight-line.jpg">
+                          </label>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <div class="col-xs-12 control-label">
+                      <label for="overlay-size">Full content overlay size</label>
+                      <p class="help-block">See thumbnail for relative size on tablet &amp; smartphone</p>
+                  </div>
+                  <div class="col-xs-12" id="overlay-size-radios">
+                      <div class="col-xs-4 col-sm-no-padding text-center">
+                          <input type="radio" name="overlay_size" id="overlay-size-small" value="small" class="hidden">
+                          <label for="overlay-size-small">
+                              <span class="help-block"><span class="fa fa-square-o"></span><span class="fa fa-check-square-o"></span> Small</span>
+                              <img class="img-responsive" src="/img/overlay-size-small.jpg">
+                          </label>
+                      </div>
+                      <div class="col-xs-4 col-sm-no-padding text-center">
+                          <input type="radio" name="overlay_size" id="overlay-size-medium" value="medium" class="hidden" checked="">
+                          <label for="overlay-size-medium">
+                              <span class="help-block"><span class="fa fa-square-o"></span><span class="fa fa-check-square-o"></span> Medium</span>
+                              <img class="img-responsive" src="/img/overlay-size-medium.jpg">
+                          </label>
+                      </div>
+                      <div class="col-xs-4 col-sm-no-padding text-center">
+                          <input type="radio" name="overlay_size" id="overlay-size-large" value="large" class="hidden">
+                          <label for="overlay-size-large">
+                              <span class="help-block"><span class="fa fa-square-o"></span><span class="fa fa-check-square-o"></span> Large</span>
+                              <img class="img-responsive" src="/img/overlay-size-large.jpg">
+                          </label>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <div class="col-xs-12 control-label">
+                      <label for="overlay-transition">Full content overlay animation</label>
+                  </div>
+                  <div class="col-xs-12">
+                      <select id="overlay-transition" name="overlay_transition" class="form-control valid">
+                          <optgroup label="Slide in">
+                              <option id="overlay-transition-fadeInDownBig" value="fadeInDownBig" selected="">Slide in from top</option>
+                              <option id="overlay-transition-fadeInLeftBig" value="fadeInLeftBig">Slide in from left</option>
+                              <option id="overlay-transition-fadeInRightBig" value="fadeInRightBig">Slide in from right</option>
+                              <option id="overlay-transition-fadeInUpBig" value="fadeInUpBig">Slide in from bottom</option>
+                          </optgroup>
+                          <optgroup label="Fade in">
+                              <option id="overlay-transition-fadeIn" value="fadeIn">Fade in</option>
+                              <option id="overlay-transition-fadeInDown" value="fadeInDown">Fade in from top</option>
+                              <option id="overlay-transition-fadeInLeft" value="fadeInLeft">Fade in from left</option>
+                              <option id="overlay-transition-fadeInRight" value="fadeInRight">Fade in from right</option>
+                              <option id="overlay-transition-fadeInUp" value="fadeInUp">Fade in from bottom</option>
+                          </optgroup>
+                          <optgroup label="Zoom in">
+                              <option id="overlay-transition-zoomIn" value="zoomIn">Zoom in</option>
+                              <option id="overlay-transition-zoomInDown" value="zoomInDown">Zoom in from top</option>
+                              <option id="overlay-transition-zoomInLeft" value="zoomInLeft">Zoom in from left</option>
+                              <option id="overlay-transition-zoomInRight" value="zoomInRight">Zoom in from right</option>
+                              <option id="overlay-transition-zoomInUp" value="zoomInUp">Zoom in from bottom</option>
+                          </optgroup>
+                          <optgroup label="Flip in">
+                              <option id="overlay-transition-flipInX" value="flipInX">Flip in (Vertical)</option>
+                              <option id="overlay-transition-flipInY" value="flipInY">Flip in (Horizontal)</option>
+                          </optgroup>
+                          <optgroup label="Bounce in">
+                              <option id="overlay-transition-bounceIn" value="bounceIn">Bounce in</option>
+                              <option id="overlay-transition-bounceInDown" value="bounceInDown">Bounce in from top</option>
+                              <option id="overlay-transition-bounceInLeft" value="bounceInLeft">Bounce in from left</option>
+                              <option id="overlay-transition-bounceInRight" value="bounceInRight">Bounce in from right</option>
+                              <option id="overlay-transition-bounceInUp" value="bounceInUp">Bounce in from bottom</option>
+                          </optgroup>
+                          <optgroup label="Rotate in">
+                              <option id="overlay-transition-rotateIn" value="rotateIn">Rotate in</option>
+                              <option id="overlay-transition-rotateInDownLeft" value="rotateInDownLeft">Rotate down from left</option>
+                              <option id="overlay-transition-rotateInDownRight" value="rotateInDownRight">Rotate down from right</option>
+                              <option id="overlay-transition-rotateInUpLeft" value="rotateInUpLeft">Rotate up from left</option>
+                              <option id="overlay-transition-rotateInUpRight" value="rotateInUpRight">Rotate up from right</option>
+                          </optgroup>
+                          <optgroup label="Attention Seekers">
+                              <option id="overlay-transition-bounce" value="bounce">Bounce</option>
+                              <option id="overlay-transition-flash" value="flash">Flash</option>
+                              <option id="overlay-transition-pulse" value="pulse">Pulse</option>
+                              <option id="overlay-transition-rubberBand" value="rubberBand">Rubber band</option>
+                              <option id="overlay-transition-shake" value="shake">Shake</option>
+                              <option id="overlay-transition-swing" value="swing">Swing</option>
+                              <option id="overlay-transition-tada" value="tada">Ta-da!</option>
+                              <option id="overlay-transition-wobble" value="wobble">Wobble</option>
+                          </optgroup>
+                          <optgroup label="Specials">
+                              <option id="overlay-transition-lightSpeedIn" value="lightSpeedIn">Light speed</option>
+                              <option id="overlay-transition-rollIn" value="rollIn">Roll in</option>
+                          </optgroup>
+                      </select>
+                      <p class="help-block"><a id="preview-overlay-animation" href="#">Preview animation</a></p>
+                      <p class="help-block hidden">
+                          <label class="checkbox-inline">
+                              <input type="checkbox" id="preview-animation-on-change" checked="checked"> Preview animation as you change options</label>
+                      </p>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-xs-12 control-label">
+                      <label for="separation-style">How would you like to separate each entry?</label>
+                  </div>
+                  <div class="col-xs-12" id="separate-style-radios">
+                      <div class="col-xs-6 col-sm-no-padding text-center">
+                          <input type="radio" name="separate_style" id="separate-style-line" value="line" class="hidden" checked="">
+                          <label for="separate-style-line">
+                              <span class="help-block"><span class="fa fa-square-o"></span><span class="fa fa-check-square-o"></span> Thin lines</span>
+                              <img class="img-responsive" src="/img/thin-line.jpg">
+                          </label>
+                      </div>
+                      <div class="col-xs-6 col-sm-no-padding text-center">
+                          <input type="radio" name="separate_style" id="separate-style-bg" value="stripes" class="hidden">
+                          <label for="separate-style-bg">
+                              <span class="help-block"><span class="fa fa-square-o"></span><span class="fa fa-check-square-o"></span> Striped</span>
+                              <img class="img-responsive" src="/img/striped-background.jpg">
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+</form>

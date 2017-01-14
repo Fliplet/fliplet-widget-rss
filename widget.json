@@ -1,0 +1,37 @@
+{
+  "name": "RSS",
+  "package": "com.fliplet.rss",
+  "version": "1.0.0",
+  "icon": "img/icon.png",
+  "tags": ["type:component", "category:Feed"],
+  "provider_only": false,
+  "references": [],
+  "html_tag": "div",
+  "interface": {
+    "dependencies": [
+      "fliplet-core",
+      "fliplet-datasources",
+      "fliplet-studio-ui",
+      "fliplet-media",
+      "handlebars",
+      "bootstrap"
+    ],
+    "assets": [
+      "css/interface.css",
+      "js/interface.js"
+    ]
+  },
+  "build": {
+    "dependencies": [
+      "bootstrap",
+      "fliplet-core",
+      "fliplet-datasources",
+      "font-awesome"
+    ],
+    "assets": [
+      "vendor/jquery.jfeed.js",
+      "css/build.css",
+      "js/build.js"
+    ]
+  }
+}

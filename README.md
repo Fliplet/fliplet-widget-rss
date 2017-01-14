@@ -1,1 +1,1 @@
-# fliplet-widget-rss
+# Fliplet RSS Component
