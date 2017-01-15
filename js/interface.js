@@ -35,8 +35,7 @@ function checkRSSIsOnlineAndGetContent(url) {
     settingsArea.addClass('checking').removeClass('checked');
     if (isValidURL(url)) {
         jQuery.getFeed({
-            url: 'https://api.fliplet.com/v1/communicate/proxy',
-            data: { "url": url },
+            url: encodeURI(Fliplet.Env.get('apiUrl') + 'v1/communicate/proxy/' + url + '?auth_token=' + Fliplet.User.getAuthToken()),
             success: function (result){
                 jFeedSuccess(result, url);
             },
@@ -84,6 +83,12 @@ $('#rss-layout input[name="rss_layout_style"]').on('change', function () {
 $('#rss-feed-url').on('keyup blur change paste input', function () {
     var _this = $(this),
         url = _this.val().trim();
+
+    if (!url.match(/^[a-zA-Z]+:\/\//))
+    {
+        url = 'http://' + url;
+        _this.val(url);
+    }
 
     clearTimeout(feedCheckTimeout);
     feedCheckTimeout = setTimeout(function () {
