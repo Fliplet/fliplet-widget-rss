@@ -1,3 +1,46 @@
+var overlay_transition_exit_map = {
+    "bounce" : "zoomOut",
+    "flash" : "zoomOut",
+    "pulse" : "zoomOut",
+    "rubberBand" : "zoomOut",
+    "shake" : "hinge",
+    "swing" : "hinge",
+    "tada" : "zoomOut",
+    "wobble" : "zoomOut",
+    "bounceIn" : "bounceOut",
+    "bounceInDown" : "bounceOutUp",
+    "bounceInLeft" : "bounceOutLeft",
+    "bounceInRight" : "bounceOutRight",
+    "bounceInUp" : "bounceOutDown",
+    "fadeIn" : "fadeOut",
+    "fadeInDown" : "fadeOutUp",
+    "fadeInDownBig" : "fadeOutUpBig",
+    "fadeInLeft" : "fadeOutLeft",
+    "fadeInLeftBig" : "fadeOutLeftBig",
+    "fadeInRight" : "fadeOutRight",
+    "fadeInRightBig" : "fadeOutRightBig",
+    "fadeInUp" : "fadeOutDown",
+    "fadeInUpBig" : "fadeOutDownBig",
+    "flipInX" : "flipOutX",
+    "flipInY" : "flipOutY",
+    "lightSpeedIn" : "lightSpeedOut",
+    "rotateIn" : "rotateOut",
+    "rotateInDownLeft" : "rotateOutUpLeft",
+    "rotateInDownRight" : "rotateOutUpRight",
+    "rotateInUpLeft" : "rotateOutDownLeft",
+    "rotateInUpRight" : "rotateOutDownRight",
+    "zoomIn" : "zoomOut",
+    "zoomInDown" : "zoomOutUp",
+    "zoomInLeft" : "zoomOutLeft",
+    "zoomInRight" : "zoomOutRight",
+    "zoomInUp" : "zoomOutDown",
+    "slideInDown" : "slideOutUp",
+    "slideInLeft" : "slideOutLeft",
+    "slideInRight" : "slideOutRight",
+    "slideInUp" : "slideOutDown",
+    "rollIn" : "rollOut"
+};
+
 var data = Fliplet.Widget.getData() || {};
 
 var organizationId = Fliplet.Env.get('organizationId');
@@ -120,3 +163,83 @@ $('input[name="separate_style"]').on('change', function () {
     $('input[name="separate_style"]').removeClass('checked');
     $(this).addClass('checked');
 });
+
+Fliplet.Widget.onSaveRequest(function () {
+  save(true);
+});
+
+function save(notifyComplete){
+
+  if(!(data.checkState === checkState.VALID)) {
+    return;
+  }
+
+  data.overlayTransition = $('#overlay-transition').val();
+  data.rssConf = {
+  feedLayout: $("input[name='rss_layout_style']:checked").val(),
+    clippingSettings: {
+        title: $('#title-clipping').val(),
+        description: $('#description-clipping').val()
+    },
+    highlighting: $("input[name='highlight_style']:checked").val(),
+    overlay: {
+        overlaySize: $("input[name='overlay_size']:checked").val(),
+        overlayTransition: data.overlayTransition ,
+        overlayTransitionExit: overlay_transition_exit_map[data.overlayTransition]
+    },
+    designSettings: {
+        separationType: $("input[name='separate_style']:checked").val()
+    },
+    feed: {
+        id: data.id !== null ? data.id: new Date().getTime(),
+        source: data.rssUrl,
+        uniqueName: hashCode(data.rssUrl)
+    }
+  };
+
+  console.log(data);
+
+  if(notifyComplete) {
+    Fliplet.Widget.save(data).then(function () {
+      // Close the interface for good
+      Fliplet.Widget.complete();
+    });
+  } else {
+    // Partial save while typing/using the interface
+    Fliplet.Widget.save(data).then(function () {
+      Fliplet.Studio.emit('reload-widget-instance', widgetId);
+    });
+  }
+}
+
+function loadSettings(data) {
+
+  if (!('rssConf' in data)) {
+      return false;
+  }
+
+  data.checkState = checkState.VALID;
+  var rssConf = data.rssConf;
+  //rss and highlight settings
+  $("input[name='rss_layout_style'][value=" + rssConf.feedLayout + "]").click();
+  $("input[name='highlight_style'][value=" + rssConf.highlighting + "]").click();
+
+  //set of clipping settings
+  $("#title-clipping").val(rssConf.clippingSettings.title);
+  $("#description-clipping").val(rssConf.clippingSettings.description);
+
+  //set of overlay settings
+  $("input[name='overlay_size'][value=" + rssConf.overlay.overlaySize + "]").click();
+  $('#overlay-transition').val(rssConf.overlay.overlayTransition);
+
+  //set of design settings
+  $("input[name='separate_style'][value=" + rssConf.designSettings.separationType + "]").click();
+
+  //set of feedURL
+  data.rssUrl = rssConf.feed.source;
+  $('#rss-feed-url').val(rssConf.feed.source);
+  $('#rss-feed-settings').removeClass('checking').removeClass('failed').addClass('active checked');
+}
+
+// LOAD SETTINGS
+loadSettings(data);
