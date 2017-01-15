@@ -10,23 +10,33 @@
   "interface": {
     "dependencies": [
       "fliplet-core",
-      "fliplet-datasources",
       "fliplet-studio-ui",
-      "fliplet-media",
+      "fliplet-communicate",
       "handlebars",
       "bootstrap"
     ],
     "assets": [
       "css/interface.css",
       "vendor/jquery.jfeed.js",
-      "js/interface.js"
+      "js/interface.js",
+      "img/highlight-circle.jpg",
+      "img/highlight-line.jpg",
+      "img/highlight-none.jpg",
+      "img/overlay-size-large.jpg",
+      "img/overlay-size-medium.jpg",
+      "img/overlay-size-small.jpg",
+      "img/striped-background.jpg",
+      "/img/text-only-layout.jpg",
+      "img/thin-line.jpg",
+      "/img/thumb-left-layout.jpg",
+      "/img/thumb-right-layout.jpg"
     ]
   },
   "build": {
     "dependencies": [
       "bootstrap",
       "fliplet-core",
-      "fliplet-datasources",
+      "fliplet-communicate",
       "font-awesome"
     ],
     "assets": [

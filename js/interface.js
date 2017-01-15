@@ -35,10 +35,8 @@ function checkRSSIsOnlineAndGetContent(url) {
     settingsArea.addClass('checking').removeClass('checked');
     if (isValidURL(url)) {
         jQuery.getFeed({
-            url: API_URL + 'proxy/forward',
-            data: {
-                "url": url
-            },
+            url: 'https://api.fliplet.com/v1/communicate/proxy',
+            data: { "url": url },
             success: function (result){
                 jFeedSuccess(result, url);
             },
@@ -49,7 +47,7 @@ function checkRSSIsOnlineAndGetContent(url) {
                         jFeedSuccess(result, url);
                     },
                     error: function () {
-                        _this.checkState = checkState.NOT_VALID;
+                        data.checkState = checkState.NOT_VALID;
                         settingsArea.removeClass('checking').addClass('failed');
                         $('.rss-fail strong').html("The URL you entered seems to lead to an invalid RSS feed or the website is offline. Please verify the URL and try again.");
                     }
