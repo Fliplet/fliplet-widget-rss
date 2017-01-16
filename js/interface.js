@@ -76,31 +76,33 @@ function checkRSSIsOnlineAndGetContent(url) {
 
     data.checkState = checkState.IN_VALIDATION;
     settingsArea.addClass('checking').removeClass('checked');
-    if (isValidURL(url)) {
+
+    if (!isValidURL(url)) {
+        data.checkState = checkState.NOT_VALID;
+        settingsArea.removeClass('checking').addClass('failed');
+        $('.rss-fail strong').html("You have entered an invalid URL. Please try again.");
+        return;
+    }
+
+    Fliplet.API.request({
+        dataType: 'xml',
+        url:'v1/communicate/proxy/' + encodeURIComponent(url)
+    }).then(function (response) {
+        var feed = new JFeed(response);
+        jFeedSuccess(feed, url);
+    }, function onError () {
         jQuery.getFeed({
-            url: encodeURI(Fliplet.Env.get('apiUrl') + 'v1/communicate/proxy/' + url + '?auth_token=' + Fliplet.User.getAuthToken()),
+            url: "http://crossorigin.me/" + url,
             success: function (result){
                 jFeedSuccess(result, url);
             },
             error: function () {
-                jQuery.getFeed({
-                    url: "http://crossorigin.me/" + url,
-                    success: function (result){
-                        jFeedSuccess(result, url);
-                    },
-                    error: function () {
-                        data.checkState = checkState.NOT_VALID;
-                        settingsArea.removeClass('checking').addClass('failed');
-                        $('.rss-fail strong').html("The URL you entered seems to lead to an invalid RSS feed or the website is offline. Please verify the URL and try again.");
-                    }
-                });
+                data.checkState = checkState.NOT_VALID;
+                settingsArea.removeClass('checking').addClass('failed');
+                $('.rss-fail strong').html("The URL you entered seems to lead to an invalid RSS feed or the website is offline. Please verify the URL and try again.");
             }
         });
-    } else {
-        data.checkState = checkState.NOT_VALID;
-        settingsArea.removeClass('checking').addClass('failed');
-        $('.rss-fail strong').html("You have entered an invalid URL. Please try again.");
-    }
+    });
 }
 
 function hashCode(s){
