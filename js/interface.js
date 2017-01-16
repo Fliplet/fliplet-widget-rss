@@ -129,7 +129,7 @@ $('#rss-feed-url').on('keyup blur change paste input', function () {
     var _this = $(this),
         url = _this.val().trim();
 
-    if (!url.match(/^[a-zA-Z]+:\/\//))
+    if (url && !url.match(/^[a-zA-Z]+:\/\//))
     {
         url = 'http://' + url;
         _this.val(url);
