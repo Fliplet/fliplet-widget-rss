@@ -5,13 +5,17 @@
         <div class="loading-message">We’re loading the feed for the first time. This will take just a couple of minutes.</div>
     </div>
 
+    <ul class="feed-panels {{rssConf.designSettings.separationType}} {{rssConf.feedLayout}}">
         {{#each items}}
+        <li id="{{@index}}" data-parent="{{../rssConf.feed.id}}" class="linked feed-item clearfix {{hasThumbnail this.thumbnail}} {{isRead this.read ../rssConf.highlighting}}">
             <span class="icon fa fa-angle-right"></span> {{#if this.thumbnail.length}}
             <div class="list-image" style="background-image: url('{{this.thumbnail}}');"></div>
             {{/if}}
             <div class="list-text-holder">
+                <p class="list-title {{clipping ../rssConf.clippingSettings.title}}">
                     <span class="circle-icon"></span> {{this.title}}
                 </p>
+                <p class="list-description {{clipping ../rssConf.clippingSettings.description}}">
                     {{this.description}}
                 </p>
             </div>

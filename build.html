@@ -3,20 +3,26 @@
     <div class="pull-right">
         <div class="btn btn-link pull-to-refresh" data-id="{{id}}">Tap to refresh</div>
     </div>
+    <div class="rss" id="{{rssConf.feed.id}}">
+
     </div>
     <div class="rss-fail">
         <strong>We were unable to retrieve your RSS feed. Please try again.</strong>
     </div>
 </div>
 {{else}}
+<div class="rss-holder placeholder">
     <div class="pull-right">
+        <div class="btn btn-link pull-to-refresh">Tap to refresh</div>
     </div>
+    <div class="rss" >
         <div class="date">last updated: a few seconds ago</div>
         <div class="feed">
             <div class="loading-message-holder">
                 <div class="loading-message">We’re loading the feed for the first time. This will take just a couple of minutes.</div>
             </div>
             <ul class="feed-panels line thumb-left">
+                <li class="linked feed-item clearfix no-image circle">
                     <span class="icon fa fa-angle-right"></span>
                     <div class="list-text-holder">
                         <p class="list-title all">
@@ -27,6 +33,7 @@
                         </p>
                     </div>
                 </li>
+                <li class="linked feed-item clearfix no-image circle">
                     <span class="icon fa fa-angle-right"></span>
                     <div class="list-text-holder">
                         <p class="list-title all">
@@ -37,6 +44,7 @@
                         </p>
                     </div>
                 </li>
+                <li class="linked feed-item clearfix no-image circle">
                     <span class="icon fa fa-angle-right"></span>
                     <div class="list-text-holder">
                         <p class="list-title all">
