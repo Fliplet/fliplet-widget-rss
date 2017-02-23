@@ -35,6 +35,7 @@
     justify-content: center;
     align-content: center;
     flex-direction: column;
+		cursor: pointer;
 }
 .feed ul.feed-panels.thumb-left > li.feed-item {
     padding: 16px 44px 16px 100px;
