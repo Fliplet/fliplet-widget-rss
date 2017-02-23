@@ -1,5 +1,5 @@
 {
-  "name": "RSS",
+  "name": "RSS Feed",
   "package": "com.fliplet.rss",
   "version": "1.0.0",
   "icon": "img/icon.png",
@@ -13,11 +13,14 @@
       "fliplet-studio-ui",
       "fliplet-communicate",
       "handlebars",
-      "bootstrap"
+      "bootstrap",
+      "animate-css"
     ],
     "assets": [
       "css/interface.css",
+      "vendor/overlay.css",
       "vendor/jquery.jfeed.js",
+      "vendor/overlay.js",
       "js/interface.js",
       "img/highlight-circle.jpg",
       "img/highlight-line.jpg",
@@ -37,11 +40,19 @@
       "bootstrap",
       "fliplet-core",
       "fliplet-communicate",
-      "font-awesome"
+      "fliplet-security",
+      "font-awesome",
+      "handlebars",
+      "moment",
+      "animate-css"
     ],
     "assets": [
       "vendor/jquery.jfeed.js",
+      "vendor/overlay.css",
+      "vendor/overlay.js",
       "css/build.css",
+      "js/build.templates.js",
+      "js/build-rss-feed.js",
       "js/build.js"
     ]
   }

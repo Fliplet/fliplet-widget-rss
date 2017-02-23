@@ -1,0 +1,21 @@
+<div id="date">{{getUpdateValue updatedTime}}</div>
+<div class="feed">
+
+    <div class="loading-message-holder">
+        <div class="loading-message">We’re loading the feed for the first time. This will take just a couple of minutes.</div>
+    </div>
+
+        {{#each items}}
+            <span class="icon fa fa-angle-right"></span> {{#if this.thumbnail.length}}
+            <div class="list-image" style="background-image: url('{{this.thumbnail}}');"></div>
+            {{/if}}
+            <div class="list-text-holder">
+                    <span class="circle-icon"></span> {{this.title}}
+                </p>
+                    {{this.description}}
+                </p>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</div>

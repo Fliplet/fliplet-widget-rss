@@ -1,12 +1,20 @@
-.rss {
-    display: block;
+.rss-holder.placeholder {
+	opacity: 0.5;
+	cursor: pointer;
+	-webkit-user-select: none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
+	-webkit-user-modify: read-only !important;
 }
-.rss .pull-to-refresh {
+.rss-holder .pull-to-refresh {
     height: 30px;
     line-height: 30px;
     font-size: 12px;
 }
-.rss #date {
+.rss {
+    display: block;
+}
+.rss .date {
     font-size: 12px;
     line-height: 30px;
     opacity: 0.5;
@@ -153,7 +161,7 @@
     top: 50%;
     right: 0;
     margin-top: -22px;
-    font-size: 18px;
+    font-size: 34px;
     line-height: 44px;
     text-align: center;
     color: #333;
@@ -179,7 +187,7 @@
     margin: 0;
     list-style: none;
 }
-#rssFail {
+.rss-fail {
     display: none;
     width: 400px;
     text-align: center;

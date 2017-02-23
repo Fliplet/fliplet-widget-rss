@@ -41,6 +41,8 @@ var overlay_transition_exit_map = {
     "rollIn" : "rollOut"
 };
 
+var sampleOverlayClosing;
+
 var data = Fliplet.Widget.getData() || {};
 
 var organizationId = Fliplet.Env.get('organizationId');
@@ -166,6 +168,9 @@ $('input[name="separate_style"]').on('change', function () {
     $(this).addClass('checked');
 });
 
+// Click to preview overlay animation
+$('#preview-overlay-animation').on( 'click', previewOverlayAnimation );
+
 Fliplet.Widget.onSaveRequest(function () {
   save(true);
 });
@@ -241,6 +246,55 @@ function loadSettings(data) {
   data.rssUrl = rssConf.feed.source;
   $('#rss-feed-url').val(rssConf.feed.source);
   $('#rss-feed-settings').removeClass('checking').removeClass('failed').addClass('active checked');
+}
+
+function previewOverlayAnimation(){
+    var $sampleOverlay = $('#sample-overlay'),
+        $sampleOverlayPanel = $sampleOverlay.find('.overlay-panel'),
+        selectedAnimation = $('#overlay-transition').val(),
+        autoCloseSampleOverlay = true;
+
+    $sampleOverlayPanel.one( 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $sampleOverlayPanel.removeClass( 'animated' );
+        $sampleOverlayPanel.removeClass( selectedAnimation );
+
+        if ( (!sampleOverlayClosing || typeof sampleOverlayClosing === 'undefined') && autoCloseSampleOverlay ) {
+            setTimeout( closeOverlayPreview, 250 );
+        }
+    } );
+
+    $sampleOverlayPanel.addClass( selectedAnimation );
+    $sampleOverlayPanel.addClass( 'animated' );
+
+    setTimeout(function(){
+        $sampleOverlay.addClass('active');
+    }, 0);
+}
+
+function closeOverlayPreview(){
+    var $sampleOverlay = $('#sample-overlay'),
+        $sampleOverlayPanel = $sampleOverlay.find('.overlay-panel'),
+        selectedAnimation = $('#overlay-transition').val(),
+        exitAnimation = overlay_transition_exit_map[selectedAnimation];
+
+    if ( !sampleOverlayClosing || typeof sampleOverlayClosing === 'undefined' ) {
+        sampleOverlayClosing = true;
+
+        $sampleOverlayPanel.one( 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            sampleOverlayClosing = false;
+            $sampleOverlay.removeClass( 'active' );
+            $sampleOverlayPanel.removeClass( 'animated' );
+            $sampleOverlayPanel.removeClass( exitAnimation );
+        } );
+
+        $sampleOverlayPanel.addClass( exitAnimation );
+        $sampleOverlayPanel.addClass( 'animated' );
+
+        // Set up a timeout to make sure it takes no longer than the timeout limit to close overlay preview
+        setTimeout(function(){
+            $sampleOverlay.removeClass( 'active' );
+        }, 1400);
+    }
 }
 
 // LOAD SETTINGS

@@ -1,1 +1,57 @@
-<p></p>
+{{#if rssConf}}
+<div data-rss-id="{{id}}" data-rss-uuid="{{uuid}}" class="rss-holder">
+    <div class="pull-right">
+        <div class="btn btn-link pull-to-refresh" data-id="{{id}}">Tap to refresh</div>
+    </div>
+    </div>
+    <div class="rss-fail">
+        <strong>We were unable to retrieve your RSS feed. Please try again.</strong>
+    </div>
+</div>
+{{else}}
+    <div class="pull-right">
+    </div>
+        <div class="date">last updated: a few seconds ago</div>
+        <div class="feed">
+            <div class="loading-message-holder">
+                <div class="loading-message">We’re loading the feed for the first time. This will take just a couple of minutes.</div>
+            </div>
+            <ul class="feed-panels line thumb-left">
+                    <span class="icon fa fa-angle-right"></span>
+                    <div class="list-text-holder">
+                        <p class="list-title all">
+                            <span class="circle-icon"></span> Feed title 1
+                        </p>
+                        <p class="list-description none">
+                            Your feed description will appear here, edit your RSS's settings to configure your content. Don't forget to view your app on different devices by changing the device preview.
+                        </p>
+                    </div>
+                </li>
+                    <span class="icon fa fa-angle-right"></span>
+                    <div class="list-text-holder">
+                        <p class="list-title all">
+                            <span class="circle-icon"></span> Feed title 1
+                        </p>
+                        <p class="list-description none">
+                            Your feed description will appear here, edit your RSS's settings to configure your content. Don't forget to view your app on different devices by changing the device preview.
+                        </p>
+                    </div>
+                </li>
+                    <span class="icon fa fa-angle-right"></span>
+                    <div class="list-text-holder">
+                        <p class="list-title all">
+                            <span class="circle-icon"></span> Feed title 1
+                        </p>
+                        <p class="list-description none">
+                            Your feed description will appear here, edit your RSS's settings to configure your content. Don't forget to view your app on different devices by changing the device preview.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="rss-fail">
+        <strong>We were unable to retrieve your RSS feed. Please try again.</strong>
+    </div>
+</div>
+{{/if}}
