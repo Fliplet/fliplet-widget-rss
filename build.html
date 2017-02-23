@@ -1,7 +1,7 @@
 {{#if rssConf}}
 <div data-rss-id="{{id}}" data-rss-uuid="{{uuid}}" class="rss-holder">
     <div class="pull-right">
-        <div class="btn btn-link pull-to-refresh" data-id="{{id}}">Tap to refresh</div>
+        <div class="btn btn-link pull-to-refresh" data-id="{{rssConf.feed.id}}">Tap to refresh</div>
     </div>
     <div class="rss" id="{{rssConf.feed.id}}">
 

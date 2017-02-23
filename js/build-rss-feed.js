@@ -30,7 +30,7 @@ var rss = (function() {
                 rssFeed = getFeedPV(rssConfig.rssConf.feed.uniqueName, window.pvObj);
 
             if (rssFeed && _this.online) {
-                loadRSS(rssConf, rssFeed);
+                loadRSS(rssConfig, rssFeed);
             }
         });
 
