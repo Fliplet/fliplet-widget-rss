@@ -7,14 +7,12 @@
 	-webkit-user-modify: read-only !important;
 }
 .rss-holder .pull-to-refresh {
-    height: 30px;
-    line-height: 30px;
     font-size: 12px;
 }
 .rss {
     display: block;
 }
-.rss .date {
+.rss #date {
     font-size: 12px;
     line-height: 30px;
     opacity: 0.5;
