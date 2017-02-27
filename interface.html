@@ -77,36 +77,48 @@
           </div>
           <div id="rss-feed-settings-container">
               <h2><small>Content settings</small></h2>
-              <div class="form-group" id="title-setting-holder">
-                  <label class="col-sm-12 control-label">Display titles</label>
-                  <div class="col-sm-12">
-                      <select class="form-control" name="title-clipping" id="title-clipping">
-                          <option value="none">Don't show</option>
-                          <option value="no-clip">Show entire title</option>
-                          <option value="clip-one">Clip to 1 line</option>
-                          <option value="clip-two" selected>Clip to 2 lines</option>
-                          <option value="clip-three">Clip to 3 lines</option>
-                          <option value="clip-four">Clip to 4 lines</option>
-                          <option value="clip-five">Clip to 5 lines</option>
-                          <option value="clip-six">Clip to 6 lines</option>
-                      </select>
-                  </div>
+              <div class="form-group clearfix" id="title-setting-holder">
+                <div class="col-sm-4 control-label">
+                  <label>Display titles</label>
+                </div>
+                <div class="col-sm-8">
+                  <label for="title-clipping" class="select-proxy-display">
+                    <select name="title-clipping" id="title-clipping" data-label="select" class="hidden-select form-control">
+                      <option value="none">Don't show</option>
+                      <option value="no-clip">Show entire title</option>
+                      <option value="clip-one">Clip to 1 line</option>
+                      <option value="clip-two" selected>Clip to 2 lines</option>
+                      <option value="clip-three">Clip to 3 lines</option>
+                      <option value="clip-four">Clip to 4 lines</option>
+                      <option value="clip-five">Clip to 5 lines</option>
+                      <option value="clip-six">Clip to 6 lines</option>
+                    </select>
+                    <span class="icon fa fa-chevron-down"></span>
+                    <span class="select-value-proxy">Clip to 2 lines</span>
+                  </label>
+                </div>
               </div>
 
-              <div class="form-group" id="description-setting-holder">
-                  <label class="col-sm-12 control-label">Display descriptions</label>
-                  <div class="col-sm-12">
-                      <select class="form-control" name="description-clipping" id="description-clipping">
-                          <option value="none">Don't show</option>
-                          <option value="no-clip">Show entire description</option>
-                          <option value="clip-one">Clip to 1 line</option>
-                          <option value="clip-two" selected>Clip to 2 lines</option>
-                          <option value="clip-three">Clip to 3 lines</option>
-                          <option value="clip-four">Clip to 4 lines</option>
-                          <option value="clip-five">Clip to 5 lines</option>
-                          <option value="clip-six">Clip to 6 lines</option>
-                      </select>
-                  </div>
+              <div class="form-group clearfix" id="description-setting-holder">
+                <div class="col-sm-4 control-label">
+                  <label>Display descriptions</label>
+                </div>
+                <div class="col-sm-8">
+                  <label for="description-clipping" class="select-proxy-display">
+                    <select name="description-clipping" id="description-clipping" data-label="select" class="hidden-select form-control">
+                      <option value="none">Don't show</option>
+                      <option value="no-clip">Show entire title</option>
+                      <option value="clip-one">Clip to 1 line</option>
+                      <option value="clip-two" selected>Clip to 2 lines</option>
+                      <option value="clip-three">Clip to 3 lines</option>
+                      <option value="clip-four">Clip to 4 lines</option>
+                      <option value="clip-five">Clip to 5 lines</option>
+                      <option value="clip-six">Clip to 6 lines</option>
+                    </select>
+                    <span class="icon fa fa-chevron-down"></span>
+                    <span class="select-value-proxy">Clip to 2 lines</span>
+                  </label>
+                </div>
               </div>
 
               <h2><small>Design settings</small></h2>
@@ -169,72 +181,77 @@
                   </div>
               </div>
 
-              <div class="form-group">
-                  <div class="col-xs-12 control-label">
-                      <label for="overlay-transition">Full content overlay animation</label>
-                  </div>
-                  <div class="col-xs-12">
-                      <select id="overlay-transition" name="overlay_transition" class="form-control valid">
-                          <optgroup label="Slide in">
-                              <option id="overlay-transition-fadeInDownBig" value="fadeInDownBig" selected="">Slide in from top</option>
-                              <option id="overlay-transition-fadeInLeftBig" value="fadeInLeftBig">Slide in from left</option>
-                              <option id="overlay-transition-fadeInRightBig" value="fadeInRightBig">Slide in from right</option>
-                              <option id="overlay-transition-fadeInUpBig" value="fadeInUpBig">Slide in from bottom</option>
-                          </optgroup>
-                          <optgroup label="Fade in">
-                              <option id="overlay-transition-fadeIn" value="fadeIn">Fade in</option>
-                              <option id="overlay-transition-fadeInDown" value="fadeInDown">Fade in from top</option>
-                              <option id="overlay-transition-fadeInLeft" value="fadeInLeft">Fade in from left</option>
-                              <option id="overlay-transition-fadeInRight" value="fadeInRight">Fade in from right</option>
-                              <option id="overlay-transition-fadeInUp" value="fadeInUp">Fade in from bottom</option>
-                          </optgroup>
-                          <optgroup label="Zoom in">
-                              <option id="overlay-transition-zoomIn" value="zoomIn">Zoom in</option>
-                              <option id="overlay-transition-zoomInDown" value="zoomInDown">Zoom in from top</option>
-                              <option id="overlay-transition-zoomInLeft" value="zoomInLeft">Zoom in from left</option>
-                              <option id="overlay-transition-zoomInRight" value="zoomInRight">Zoom in from right</option>
-                              <option id="overlay-transition-zoomInUp" value="zoomInUp">Zoom in from bottom</option>
-                          </optgroup>
-                          <optgroup label="Flip in">
-                              <option id="overlay-transition-flipInX" value="flipInX">Flip in (Vertical)</option>
-                              <option id="overlay-transition-flipInY" value="flipInY">Flip in (Horizontal)</option>
-                          </optgroup>
-                          <optgroup label="Bounce in">
-                              <option id="overlay-transition-bounceIn" value="bounceIn">Bounce in</option>
-                              <option id="overlay-transition-bounceInDown" value="bounceInDown">Bounce in from top</option>
-                              <option id="overlay-transition-bounceInLeft" value="bounceInLeft">Bounce in from left</option>
-                              <option id="overlay-transition-bounceInRight" value="bounceInRight">Bounce in from right</option>
-                              <option id="overlay-transition-bounceInUp" value="bounceInUp">Bounce in from bottom</option>
-                          </optgroup>
-                          <optgroup label="Rotate in">
-                              <option id="overlay-transition-rotateIn" value="rotateIn">Rotate in</option>
-                              <option id="overlay-transition-rotateInDownLeft" value="rotateInDownLeft">Rotate down from left</option>
-                              <option id="overlay-transition-rotateInDownRight" value="rotateInDownRight">Rotate down from right</option>
-                              <option id="overlay-transition-rotateInUpLeft" value="rotateInUpLeft">Rotate up from left</option>
-                              <option id="overlay-transition-rotateInUpRight" value="rotateInUpRight">Rotate up from right</option>
-                          </optgroup>
-                          <optgroup label="Attention Seekers">
-                              <option id="overlay-transition-bounce" value="bounce">Bounce</option>
-                              <option id="overlay-transition-flash" value="flash">Flash</option>
-                              <option id="overlay-transition-pulse" value="pulse">Pulse</option>
-                              <option id="overlay-transition-rubberBand" value="rubberBand">Rubber band</option>
-                              <option id="overlay-transition-shake" value="shake">Shake</option>
-                              <option id="overlay-transition-swing" value="swing">Swing</option>
-                              <option id="overlay-transition-tada" value="tada">Ta-da!</option>
-                              <option id="overlay-transition-wobble" value="wobble">Wobble</option>
-                          </optgroup>
-                          <optgroup label="Specials">
-                              <option id="overlay-transition-lightSpeedIn" value="lightSpeedIn">Light speed</option>
-                              <option id="overlay-transition-rollIn" value="rollIn">Roll in</option>
-                          </optgroup>
-                      </select>
-                      <p class="help-block"><a id="preview-overlay-animation" href="#">Preview animation</a></p>
-                      <p class="help-block hidden">
-                          <label class="checkbox-inline">
-                              <input type="checkbox" id="preview-animation-on-change" checked="checked"> Preview animation as you change options</label>
-                      </p>
-                  </div>
+              <div class="form-group clearfix">
+                <div class="col-sm-4 control-label">
+                  <label>Full content overlay animation</label>
+                </div>
+                <div class="col-sm-8">
+                  <label for="overlay-transition" class="select-proxy-display">
+                    <select id="overlay-transition" name="overlay_transition" data-label="select" class="hidden-select form-control">
+                      <optgroup label="Slide in">
+                          <option id="overlay-transition-fadeInDownBig" value="fadeInDownBig" selected="">Slide in from top</option>
+                          <option id="overlay-transition-fadeInLeftBig" value="fadeInLeftBig">Slide in from left</option>
+                          <option id="overlay-transition-fadeInRightBig" value="fadeInRightBig">Slide in from right</option>
+                          <option id="overlay-transition-fadeInUpBig" value="fadeInUpBig">Slide in from bottom</option>
+                      </optgroup>
+                      <optgroup label="Fade in">
+                          <option id="overlay-transition-fadeIn" value="fadeIn">Fade in</option>
+                          <option id="overlay-transition-fadeInDown" value="fadeInDown">Fade in from top</option>
+                          <option id="overlay-transition-fadeInLeft" value="fadeInLeft">Fade in from left</option>
+                          <option id="overlay-transition-fadeInRight" value="fadeInRight">Fade in from right</option>
+                          <option id="overlay-transition-fadeInUp" value="fadeInUp">Fade in from bottom</option>
+                      </optgroup>
+                      <optgroup label="Zoom in">
+                          <option id="overlay-transition-zoomIn" value="zoomIn">Zoom in</option>
+                          <option id="overlay-transition-zoomInDown" value="zoomInDown">Zoom in from top</option>
+                          <option id="overlay-transition-zoomInLeft" value="zoomInLeft">Zoom in from left</option>
+                          <option id="overlay-transition-zoomInRight" value="zoomInRight">Zoom in from right</option>
+                          <option id="overlay-transition-zoomInUp" value="zoomInUp">Zoom in from bottom</option>
+                      </optgroup>
+                      <optgroup label="Flip in">
+                          <option id="overlay-transition-flipInX" value="flipInX">Flip in (Vertical)</option>
+                          <option id="overlay-transition-flipInY" value="flipInY">Flip in (Horizontal)</option>
+                      </optgroup>
+                      <optgroup label="Bounce in">
+                          <option id="overlay-transition-bounceIn" value="bounceIn">Bounce in</option>
+                          <option id="overlay-transition-bounceInDown" value="bounceInDown">Bounce in from top</option>
+                          <option id="overlay-transition-bounceInLeft" value="bounceInLeft">Bounce in from left</option>
+                          <option id="overlay-transition-bounceInRight" value="bounceInRight">Bounce in from right</option>
+                          <option id="overlay-transition-bounceInUp" value="bounceInUp">Bounce in from bottom</option>
+                      </optgroup>
+                      <optgroup label="Rotate in">
+                          <option id="overlay-transition-rotateIn" value="rotateIn">Rotate in</option>
+                          <option id="overlay-transition-rotateInDownLeft" value="rotateInDownLeft">Rotate down from left</option>
+                          <option id="overlay-transition-rotateInDownRight" value="rotateInDownRight">Rotate down from right</option>
+                          <option id="overlay-transition-rotateInUpLeft" value="rotateInUpLeft">Rotate up from left</option>
+                          <option id="overlay-transition-rotateInUpRight" value="rotateInUpRight">Rotate up from right</option>
+                      </optgroup>
+                      <optgroup label="Attention Seekers">
+                          <option id="overlay-transition-bounce" value="bounce">Bounce</option>
+                          <option id="overlay-transition-flash" value="flash">Flash</option>
+                          <option id="overlay-transition-pulse" value="pulse">Pulse</option>
+                          <option id="overlay-transition-rubberBand" value="rubberBand">Rubber band</option>
+                          <option id="overlay-transition-shake" value="shake">Shake</option>
+                          <option id="overlay-transition-swing" value="swing">Swing</option>
+                          <option id="overlay-transition-tada" value="tada">Ta-da!</option>
+                          <option id="overlay-transition-wobble" value="wobble">Wobble</option>
+                      </optgroup>
+                      <optgroup label="Specials">
+                          <option id="overlay-transition-lightSpeedIn" value="lightSpeedIn">Light speed</option>
+                          <option id="overlay-transition-rollIn" value="rollIn">Roll in</option>
+                      </optgroup>
+                    </select>
+                    <span class="icon fa fa-chevron-down"></span>
+                    <span class="select-value-proxy">Clip to 2 lines</span>
+                  </label>
+                  <p class="help-block"><a id="preview-overlay-animation" href="#">Preview animation</a></p>
+                  <p class="help-block hidden">
+                    <label class="checkbox-inline">
+                    <input type="checkbox" id="preview-animation-on-change" checked="checked"> Preview animation as you change options</label>
+                  </p>
+                </div>
               </div>
+
               <div class="form-group">
                   <div class="col-xs-12 control-label">
                       <label for="separation-style">How would you like to separate each entry?</label>

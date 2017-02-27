@@ -171,6 +171,11 @@ $('input[name="separate_style"]').on('change', function () {
 // Click to preview overlay animation
 $('#preview-overlay-animation').on( 'click', previewOverlayAnimation );
 
+$('#title-clipping, #description-clipping, #overlay-transition').on('change', function() {
+  var selectedText = $(this).find("option:selected").text();
+  $(this).parents('.select-proxy-display').find('.select-value-proxy').html(selectedText);
+});
+
 Fliplet.Widget.onSaveRequest(function () {
   save(true);
 });
@@ -232,12 +237,12 @@ function loadSettings(data) {
   $("input[name='highlight_style'][value=" + rssConf.highlighting + "]").click();
 
   //set of clipping settings
-  $("#title-clipping").val(rssConf.clippingSettings.title);
-  $("#description-clipping").val(rssConf.clippingSettings.description);
+  $("#title-clipping").val(rssConf.clippingSettings.title).trigger('change');
+  $("#description-clipping").val(rssConf.clippingSettings.description).trigger('change');
 
   //set of overlay settings
   $("input[name='overlay_size'][value=" + rssConf.overlay.overlaySize + "]").click();
-  $('#overlay-transition').val(rssConf.overlay.overlayTransition);
+  $('#overlay-transition').val(rssConf.overlay.overlayTransition).trigger('change');
 
   //set of design settings
   $("input[name='separate_style'][value=" + rssConf.designSettings.separationType + "]").click();
