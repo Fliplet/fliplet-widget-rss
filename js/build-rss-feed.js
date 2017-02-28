@@ -98,7 +98,7 @@ var rss = (function() {
             // Register a helper
             Handlebars.registerHelper('getUpdateValue', function(date) {
                 // date is the argument passed to the helper when called
-
+                console.log(date);
                 return 'Last updated: ' + moment(new Date(date)).fromNow();
             });
 
@@ -260,7 +260,7 @@ var rss = (function() {
                     collectReadStatesFromOld(rssPV.items, feed.items);
                 }
                 rssPV.items = feed.items;
-                rssPV.lastUpdateDate = moment();
+                rssPV.updatedTime = now;
                 configuration.items = feed.items;
                 configuration.updatedTime = now;
                 Fliplet.Security.Storage.update();
@@ -362,7 +362,7 @@ var rss = (function() {
 
 function FlipletFeed(rssConf, source, updateTime, items, uniqueName, transition, uuid) {
     this.rssUrl = source;
-    this.updateTime = updateTime;
+    this.updatedTime = updateTime;
     this.items = items;
     this.uniqueName = uniqueName;
     this.uuid = uuid;
@@ -372,7 +372,7 @@ function FlipletFeed(rssConf, source, updateTime, items, uniqueName, transition,
 
 FlipletFeed.prototype = {
     title: '',
-    updateTime: '',
+    updatedTime: '',
     rssUrl: '',
     items: [],
     rssConf: {},
