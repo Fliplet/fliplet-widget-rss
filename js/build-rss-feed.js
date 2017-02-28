@@ -264,13 +264,14 @@ var rss = (function() {
                 configuration.items = feed.items;
                 configuration.updatedTime = now;
                 Fliplet.Security.Storage.update();
+                $('.rss-fail').removeClass("show");
                 $('.feed').removeClass('loading');
                 if ($('.pull-to-refresh').hasClass('refreshing')) {
                     $('.pull-to-refresh').removeClass('refreshing').html('Tap to refresh');
                 }
                 processFeed(configuration);
             }, function onError() {
-                $('#rssFail').removeClass("hidden");
+                $('.rss-fail').addClass("show");
                 $('.rss-fail strong').html("The URL you entered seems to lead to an invalid RSS feed or the website is offline.");
                 $('.feed').removeClass('loading').addClass('loaded');
                 if ($('.pull-to-refresh').hasClass('refreshing')) {
@@ -309,17 +310,17 @@ var rss = (function() {
      * @param rssConfiguration rss Persistence Variable
      */
     function processFeed(rssConfiguration) {
-        var failDiv = $('#rssFail');
+        var failDiv = $('.rss-fail');
 
         if (typeof rssConfiguration.items !== 'undefined') {
 
             if (rssConfiguration.items.length === 0) {
-                failDiv.removeClass("hidden");
+                failDiv.addClass("show");
                 $('.rss-fail strong').html("The RSS feed is empty.");
                 return;
             }
 
-            failDiv.addClass("hidden");
+            failDiv.removeClass("show");
 
             $('.feed').removeClass('loading').addClass('loaded');
             // Add the compiled html to the page
