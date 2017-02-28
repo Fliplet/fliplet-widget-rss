@@ -8,14 +8,15 @@ var rss = (function() {
         this.registerHandlebarsMethods();
         this.online = Fliplet.Navigator.isOnline();
 
-        document.addEventListener("offline", function() {
-            _this.showOfflineMessage();
+        Fliplet.Navigator.onOffline(function () {
             _this.online = false;
-        }, false);
+            _this.showOfflineMessage();
+        });
 
-        document.addEventListener("online", function() {
+        Fliplet.Navigator.onOnline(function () {
+            _this.online = true;
             checkConnection(false, configuration);
-        }, false);
+        });
 
         $('.pull-to-refresh').on('click', function() {
 
@@ -58,26 +59,16 @@ var rss = (function() {
         },
         // Show the offline message
         showOfflineMessage: function() {
-            var $offlineWarning = $('.offline-notification');
-            if ($offlineWarning.hasClass('fadeOutUp')) {
-                if ($offlineWarning.hasClass('show')) {
-                    $offlineWarning.removeClass('fadeOutUp show fadeInDown').addClass('show fadeInDown');
-                } else {
-                    $offlineWarning.removeClass('fadeOutUp').addClass('show fadeInDown');
-                }
-            } else {
-                $offlineWarning.addClass('show fadeInDown');
-            }
+          var $offlineWarning = $('.offline-notification');
+          $offlineWarning.removeClass('fadeOutDown show fadeInUp').addClass('show fadeInUp');
         },
 
         removeOfflineMessage: function() {
             var $offlineWarning = $('.offline-notification');
-            if ($offlineWarning.hasClass('show')) {
-                $offlineWarning.removeClass('fadeInDown').addClass('fadeOutUp');
-                setTimeout(function() {
-                    $offlineWarning.removeClass('show');
-                }, 1000);
-            }
+            $offlineWarning.removeClass('fadeInUp').addClass('fadeOutDown');
+            setTimeout(function() {
+                $offlineWarning.removeClass('show');
+            }, 1000);
         },
         registerHandlebarsMethods: function() {
             // Register a helper
@@ -139,6 +130,12 @@ var rss = (function() {
             if (onInit) {
                 initializePV(configuration);
             }
+        } else if (_this.online) {
+            _this.removeOfflineMessage();
+            _this.online = true;
+            if (onInit) {
+                initializePV(configuration);
+            }
         } else {
             _this.showOfflineMessage();
             _this.online = false;
@@ -182,7 +179,7 @@ var rss = (function() {
 
                     if (!feedPV) {
                         var now = moment();
-                        feedPV = new FlipletFeed(feedConf.rssConf.feed.source, now, [], feedConf.rssConf.feed.uniqueName);
+                        feedPV = new FlipletFeed(feedConf.rssConf, feedConf.rssConf.feed.source, now, [], feedConf.rssConf.feed.uniqueName, feedConf.overlayTransition, feedConf.uuid);
                         pvObj.feeds.push(feedPV);
                     }
 
@@ -363,21 +360,25 @@ var rss = (function() {
     return rss;
 })();
 
-function FlipletFeed(source, updateTime, items, uniqueName) {
-    this.source = source;
+function FlipletFeed(rssConf, source, updateTime, items, uniqueName, transition, uuid) {
+    this.rssUrl = source;
     this.updateTime = updateTime;
     this.items = items;
     this.uniqueName = uniqueName;
+    this.uuid = uuid;
+    this.overlayTransition = transition;
+    this.rssConf = rssConf;
 }
 
 FlipletFeed.prototype = {
-
     title: '',
     updateTime: '',
-    source: '',
+    rssUrl: '',
     items: [],
-    uniqueName: ''
-
+    rssConf: {},
+    uniqueName: '',
+    overlayTransition: '',
+    uuid: ''
 };
 
 /*****************************************/

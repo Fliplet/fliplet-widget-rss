@@ -1,5 +1,6 @@
 {{#if rssConf}}
 <div data-rss-id="{{id}}" data-rss-uuid="{{uuid}}" class="rss-holder">
+    <div class="offline-notification animated">Your device is offline</div>
     <div class="pull-right">
         <div class="btn btn-link pull-to-refresh" data-id="{{rssConf.feed.id}}">Tap to refresh</div>
     </div>
@@ -57,9 +58,6 @@
                 </li>
             </ul>
         </div>
-    </div>
-    <div class="rss-fail">
-        <strong>We were unable to retrieve your RSS feed. Please try again.</strong>
     </div>
 </div>
 {{/if}}
