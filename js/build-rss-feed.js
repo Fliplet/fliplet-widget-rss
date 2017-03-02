@@ -95,7 +95,6 @@ var rss = (function() {
             // Register a helper
             Handlebars.registerHelper('getUpdateValue', function(date) {
                 // date is the argument passed to the helper when called
-                console.log(date);
                 return 'Last updated: ' + moment(new Date(date)).fromNow();
             });
 
@@ -257,12 +256,10 @@ var rss = (function() {
                     collectReadStatesFromOld(rssPV.items, feed.items);
                 }
                 // Trim feed items
-                console.log(feed.items);
                 for (var i = 0; i < feed.items.length; i++) {
                   feed.items[i].description = feed.items[i].description.trim();
                   feed.items[i].title = feed.items[i].title.trim();
                 }
-                console.log(feed.items);
                 rssPV.items = feed.items;
                 rssPV.updatedTime = now;
                 configuration.items = feed.items;
