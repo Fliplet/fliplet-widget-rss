@@ -33,7 +33,7 @@ this["Fliplet"]["Widget"]["Templates"]["templates.rssfeeds"] = Handlebars.templa
 
   return "<div id=\"date\">"
     + alias2((helpers.getUpdateValue || (depth0 && depth0.getUpdateValue) || helpers.helperMissing).call(alias1,(depth0 != null ? depth0.updatedTime : depth0),{"name":"getUpdateValue","hash":{},"data":data}))
-    + "</div>\n<div class=\"feed\">\n\n    <div class=\"loading-message-holder\">\n        <div class=\"loading-message\">We’re loading the feed for the first time. This will take just a couple of minutes.</div>\n    </div>\n\n    <ul class=\"feed-panels "
+    + "</div>\n<div class=\"offline-notification animated\">Your device is offline</div>\n<div class=\"feed\">\n\n    <div class=\"loading-message-holder\">\n        <div class=\"loading-message\">We’re loading the feed for the first time. This will take just a couple of minutes.</div>\n    </div>\n\n    <ul class=\"feed-panels "
     + alias2(alias3(((stack1 = ((stack1 = (depth0 != null ? depth0.rssConf : depth0)) != null ? stack1.designSettings : stack1)) != null ? stack1.separationType : stack1), depth0))
     + " "
     + alias2(alias3(((stack1 = (depth0 != null ? depth0.rssConf : depth0)) != null ? stack1.feedLayout : stack1), depth0))

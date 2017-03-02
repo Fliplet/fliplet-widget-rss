@@ -23,7 +23,6 @@
 }
 
 .feed {
-	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
@@ -45,21 +44,21 @@
 }
 
 .feed ul.feed-panels.thumb-left > li.feed-item {
-	padding: 16px 44px 16px 100px;
+	padding: 16px 44px 16px 110px;
 }
 
 .feed ul.feed-panels.line.thumb-left > li.feed-item.line,
 .feed ul.feed-panels.stripes.thumb-left > li.feed-item {
-	padding: 16px 44px 16px 116px;
+	padding: 16px 44px 16px 110px;
 }
 
 .feed ul.feed-panels.line.thumb-right > li.feed-item {
-	padding: 16px 150px 16px 0;
+	padding: 16px 150px 16px 5px;
 }
 
 .feed ul.feed-panels.line.thumb-right > li.feed-item.line,
 .feed ul.feed-panels.stripes.thumb-right > li.feed-item {
-	padding: 16px 150px 16px 16px;
+	padding: 16px 150px 16px 5px;
 }
 
 .feed ul.feed-panels.line.text-only > li.feed-item,
@@ -67,7 +66,7 @@
 .feed ul.feed-panels.line.text-only > li.feed-item.no-image,
 .feed ul.feed-panels.line.thumb-left > li.feed-item.no-image,
 .feed ul.feed-panels.line.thumb-right > li.feed-item.no-image {
-	padding: 16px 44px 16px 0;
+	padding: 16px 44px 16px 5px;
 }
 
 .feed ul.feed-panels.line.text-only > li.feed-item.line,
@@ -76,11 +75,12 @@
 .feed ul.feed-panels.stripes.text-only > li.feed-item,
 .feed ul.feed-panels.stripes.thumb-left > li.feed-item.no-image,
 .feed ul.feed-panels.stripes.thumb-right > li.feed-item.no-image {
-	padding: 16px 44px 16px 16px;
+	padding: 16px 44px 16px 5px;
 }
 
 .feed ul.feed-panels.line > li.feed-item {
 	border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+	border-left: 6px solid transparent;
 }
 
 .feed ul.feed-panels.stripes > li.feed-item:nth-child(odd) {
@@ -91,7 +91,7 @@
 	width: 90px;
 	height: 90px;
 	position: absolute;
-	left: 0;
+	left: 5px;
 	top: 50%;
 	margin-top: -45px;
 	background-size: cover;
@@ -101,7 +101,7 @@
 
 .feed ul.feed-panels.stripes.thumb-left > li.feed-item .list-image,
 .feed ul.feed-panels.thumb-left > li.feed-item.line .list-image {
-	left: 16px;
+	left: 5px;
 }
 
 .feed ul.feed-panels.thumb-right > li.feed-item .list-image {
@@ -139,7 +139,8 @@
 }
 
 .feed .list-text-holder p.list-description {
-	margin: 10px 0 0;
+	margin: 0;
+	opacity: 0.8;
 }
 
 .clip {
@@ -238,16 +239,23 @@
 }
 
 .offline-notification {
-	display: none;
-	position: fixed;
 	background-color: #F44336;
 	color: #FFF;
-	bottom: 0;
-	left: 0;
-	right: 0;
 	z-index: 10;
 	text-align: center;
 	padding: 5px;
+	font-size: 14px;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all 1s ease;
+	transition: all 1s ease;
+}
+
+.offline-notification.offline {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transition: all 1s ease;
+	transition: all 1s ease;
 }
 
 .overlayPanelContent iframe,

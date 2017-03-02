@@ -60,15 +60,12 @@ var rss = (function() {
         // Show the offline message
         showOfflineMessage: function() {
           var $offlineWarning = $('.offline-notification');
-          $offlineWarning.removeClass('fadeOutDown show fadeInUp').addClass('show fadeInUp');
+          $offlineWarning.addClass('offline');
         },
 
         removeOfflineMessage: function() {
             var $offlineWarning = $('.offline-notification');
-            $offlineWarning.removeClass('fadeInUp').addClass('fadeOutDown');
-            setTimeout(function() {
-                $offlineWarning.removeClass('show');
-            }, 1000);
+            $offlineWarning.removeClass('offline');
         },
         registerHandlebarsMethods: function() {
             // Register a helper
@@ -259,6 +256,13 @@ var rss = (function() {
                 if (typeof rssPV.items !== 'undefined') {
                     collectReadStatesFromOld(rssPV.items, feed.items);
                 }
+                // Trim feed items
+                console.log(feed.items);
+                for (var i = 0; i < feed.items.length; i++) {
+                  feed.items[i].description = feed.items[i].description.trim();
+                  feed.items[i].title = feed.items[i].title.trim();
+                }
+                console.log(feed.items);
                 rssPV.items = feed.items;
                 rssPV.updatedTime = now;
                 configuration.items = feed.items;
