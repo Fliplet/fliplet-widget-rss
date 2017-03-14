@@ -87,6 +87,10 @@
 	background-color: rgba(216, 216, 216, 0.2);
 }
 
+.feed ul.feed-panels.text-only > li.feed-item .list-image {
+	display: none;
+}
+
 .feed ul.feed-panels.thumb-left > li.feed-item .list-image {
 	width: 90px;
 	height: 90px;
