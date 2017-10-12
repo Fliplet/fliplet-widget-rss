@@ -18,9 +18,7 @@
     ],
     "assets": [
       "css/interface.css",
-      "vendor/overlay.css",
       "vendor/jquery.jfeed.js",
-      "vendor/overlay.js",
       "js/interface.js",
       "img/highlight-circle.jpg",
       "img/highlight-line.jpg",
@@ -48,8 +46,6 @@
     ],
     "assets": [
       "vendor/jquery.jfeed.js",
-      "vendor/overlay.css",
-      "vendor/overlay.js",
       "css/build.css",
       "js/build.templates.js",
       "js/build-rss-feed.js",

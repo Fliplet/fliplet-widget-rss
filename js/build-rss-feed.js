@@ -342,7 +342,7 @@ var rss = (function() {
                 Fliplet.Security.Storage.update();
 
                 // Open Overlay
-                new Overlay(overlayContent, {
+                new Fliplet.Utils.Overlay(overlayContent, {
                     showOnInit: true,
                     title: title,
                     actionText: 'Read Online',
