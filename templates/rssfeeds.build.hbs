@@ -14,10 +14,10 @@
             {{/if}}
             <div class="list-text-holder">
                 <p class="list-title {{clipping ../rssConf.clippingSettings.title}}">
-                    <span class="circle-icon"></span> {{this.title}}
+                    <span class="circle-icon"></span> {{safeString this.title}}
                 </p>
                 <p class="list-description {{clipping ../rssConf.clippingSettings.description}}">
-                    {{this.description}}
+                    {{safeString this.description}}
                 </p>
             </div>
         </li>

@@ -3,12 +3,12 @@ this["Fliplet"]["Widget"] = this["Fliplet"]["Widget"] || {};
 this["Fliplet"]["Widget"]["Templates"] = this["Fliplet"]["Widget"]["Templates"] || {};
 
 this["Fliplet"]["Widget"]["Templates"]["templates.rssfeeds"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3=container.escapeExpression, alias4=container.lambda;
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3=container.escapeExpression;
 
   return "        <li id=\""
     + alias3(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"index","hash":{},"data":data}) : helper)))
     + "\" data-parent=\""
-    + alias3(alias4(((stack1 = ((stack1 = (depths[1] != null ? depths[1].rssConf : depths[1])) != null ? stack1.feed : stack1)) != null ? stack1.id : stack1), depth0))
+    + alias3(container.lambda(((stack1 = ((stack1 = (depths[1] != null ? depths[1].rssConf : depths[1])) != null ? stack1.feed : stack1)) != null ? stack1.id : stack1), depth0))
     + "\" class=\"linked feed-item clearfix "
     + alias3((helpers.hasThumbnail || (depth0 && depth0.hasThumbnail) || alias2).call(alias1,(depth0 != null ? depth0.thumbnail : depth0),{"name":"hasThumbnail","hash":{},"data":data}))
     + " "
@@ -18,11 +18,11 @@ this["Fliplet"]["Widget"]["Templates"]["templates.rssfeeds"] = Handlebars.templa
     + "            <div class=\"list-text-holder\">\n                <p class=\"list-title "
     + alias3((helpers.clipping || (depth0 && depth0.clipping) || alias2).call(alias1,((stack1 = ((stack1 = (depths[1] != null ? depths[1].rssConf : depths[1])) != null ? stack1.clippingSettings : stack1)) != null ? stack1.title : stack1),{"name":"clipping","hash":{},"data":data}))
     + "\">\n                    <span class=\"circle-icon\"></span> "
-    + alias3(alias4((depth0 != null ? depth0.title : depth0), depth0))
+    + alias3((helpers.safeString || (depth0 && depth0.safeString) || alias2).call(alias1,(depth0 != null ? depth0.title : depth0),{"name":"safeString","hash":{},"data":data}))
     + "\n                </p>\n                <p class=\"list-description "
     + alias3((helpers.clipping || (depth0 && depth0.clipping) || alias2).call(alias1,((stack1 = ((stack1 = (depths[1] != null ? depths[1].rssConf : depths[1])) != null ? stack1.clippingSettings : stack1)) != null ? stack1.description : stack1),{"name":"clipping","hash":{},"data":data}))
     + "\">\n                    "
-    + alias3(alias4((depth0 != null ? depth0.description : depth0), depth0))
+    + alias3((helpers.safeString || (depth0 && depth0.safeString) || alias2).call(alias1,(depth0 != null ? depth0.description : depth0),{"name":"safeString","hash":{},"data":data}))
     + "\n                </p>\n            </div>\n        </li>\n";
 },"2":function(container,depth0,helpers,partials,data) {
     return "\n            <div class=\"list-image\" style=\"background-image: url('"
