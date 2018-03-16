@@ -281,9 +281,6 @@ var rss = (function() {
         console.error('Invalid RSS', e);
         if (typeof Raven !== 'undefined' && Raven.captureMessage) {
           Raven.captureMessage('Error loading RSS feed', {
-            user: Fliplet.User.get('id'),
-            app: Fliplet.Env.get('appId'),
-            page: Fliplet.Env.get('pageId'),
             feed: configuration.rssConf.feed.source,
             error: e
           });
