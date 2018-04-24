@@ -5,6 +5,12 @@
      * and GPL (GPL-license.txt) licenses.
      */
 
+    /* Custom changes
+     * 
+     * - Added additional thumbnail tags for scanning to fix
+     *   https://github.com/Fliplet/fliplet-studio/issues/2527
+     */
+
     var thumbnailTags = [
         'thumbnail',
         'media\\:thumbnail',
