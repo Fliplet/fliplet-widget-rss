@@ -11,11 +11,54 @@
      *   https://github.com/Fliplet/fliplet-studio/issues/2527
      */
 
-    var thumbnailTags = [
-        'thumbnail',
-        'media\\:thumbnail',
-        'media\\:content'
-    ];
+    function getItemThumbnail(item) {
+        var thumbnailPaths = [
+            {
+                path: 'thumbnail'
+            },
+            {
+                path: 'media\\:thumbnail'
+            },
+            {
+                path: 'media\\:content'
+            },
+            {
+                path: 'image url',
+                type: 'html'
+            }
+        ];
+        var url;
+        var tag;
+        var $thumbnail;
+
+        // Tries to find tags
+        for (var i = 0, l = thumbnailPaths.length; i < l; i++) {
+            tag = thumbnailPaths[i];
+            $thumbnail = jQuery(item).find(tag.path).eq(0);
+
+            if (!$thumbnail.length) {
+                continue;
+            }
+
+            switch (tag.type) {
+                case 'attr':
+                    url = $thumbnail.attr(tag.attr);
+                    break;
+                case 'html':
+                    url = $thumbnail.html();
+                    break;
+                default:
+                    url = $thumbnail.attr('url');
+                    break;
+            }
+
+            if (url) {
+                break;
+            }
+        }
+
+        return url;
+    }
 
     jQuery.getFeed = function(options) {
 
@@ -152,13 +195,7 @@
                 } else {
                     item.content = content.text();
                 }
-                var thumbnail;
-                for (var i = 0, l = thumbnailTags.length; i < l; i++) {
-                    thumbnail = jQuery(this).find(thumbnailTags[i]).eq(0).attr("url");
-                    if (thumbnail) {
-                        break;
-                    }
-                }
+                var thumbnail = getItemThumbnail(this);
                 if (thumbnail) {
                     item.thumbnail = thumbnail;
                 } else {
@@ -209,13 +246,7 @@
                     item.content = content.text();
                 }
 
-                var thumbnail;
-                for (var i = 0, l = thumbnailTags.length; i < l; i++) {
-                    thumbnail = jQuery(this).find(thumbnailTags[i]).eq(0).attr("url");
-                    if (thumbnail) {
-                        break;
-                    }
-                }
+                var thumbnail = getItemThumbnail(this);
                 if (thumbnail) {
                     item.thumbnail = thumbnail;
                 } else {
