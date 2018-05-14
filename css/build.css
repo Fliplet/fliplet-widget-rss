@@ -251,6 +251,7 @@
 	font-size: 14px;
 	opacity: 0;
 	visibility: hidden;
+	display:none;
 	-webkit-transition: all 1s ease;
 	transition: all 1s ease;
 }
@@ -258,6 +259,7 @@
 .offline-notification.offline {
 	opacity: 1;
 	visibility: visible;
+	display:block;
 	-webkit-transition: all 1s ease;
 	transition: all 1s ease;
 }
