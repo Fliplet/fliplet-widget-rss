@@ -27,8 +27,8 @@ var rss = (function() {
         $this.removeClass('refreshing').html('Tap to refresh');
       }, 10000);
 
-      var rssConfig = getFeedConfiguration($(this).data('id')),
-        rssFeed = getFeedPV(rssConfig.rssConf.feed.uniqueName, window.pvObj);
+      var rssConfig = getFeedConfiguration($(this).data('id'));
+      var rssFeed = getFeedPV(rssConfig.rssConf.feed.uniqueName, window.pvObj);
 
       if (rssFeed && _this.online) {
         loadRSS(rssConfig, rssFeed);
@@ -334,18 +334,27 @@ var rss = (function() {
       $('#' + rssConfiguration.rssConf.feed.id + '').html(tpl('rssfeeds')(rssConfiguration));
 
       $('.feed-item').off().on('click', function() {
-        var itemIndex = Number(this.id),
-          rssConfig = getFeedConfiguration($(this).data('parent')),
-          rssFeed = getFeedPV(rssConfig.rssConf.feed.uniqueName, window.pvObj),
-          listItem = rssFeed.items[itemIndex],
-          title = listItem.title,
-          content = "<div>" + listItem.content + "</div>",
-          overlayContent = "<h1>" + title + "</h1>" + content;
+        var itemIndex = Number(this.id);
+        var rssConfig = getFeedConfiguration($(this).data('parent'));
+        var rssFeed = getFeedPV(rssConfig.rssConf.feed.uniqueName, window.pvObj);
+        var listItem = rssFeed.items[itemIndex];
+        var title = listItem.title;
+        var content = "<div>" + listItem.content + "</div>";
+        var overlayContent = "<h1>" + title + "</h1>" + content;
 
         //read and unread state.
         listItem.read = true;
         $(this).removeClass(rssConfig.rssConf.highlighting);
         Fliplet.Security.Storage.update();
+
+        if (rssConfig.rssConf.offlineCache === false) {
+          if (!Fliplet.Navigator.isOnline()) {
+            Fliplet.UI.Toast('Device offline. Try again later.')
+            return;
+          }
+          Fliplet.Navigate.url(listItem.link);
+          return;
+        }
 
         // Open Overlay
         new Fliplet.Utils.Overlay(overlayContent, {
