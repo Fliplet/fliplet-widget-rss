@@ -171,11 +171,6 @@ $('input[name="separate_style"]').on('change', function() {
 // Click to preview overlay animation
 $('#preview-overlay-animation').on('click', previewOverlayAnimation);
 
-$('#title-clipping, #description-clipping, #overlay-transition').on('change', function() {
-  var selectedText = $(this).find('option:selected').text();
-  $(this).parents('.select-proxy-display').find('.select-value-proxy').html(selectedText);
-});
-
 Fliplet.Widget.onSaveRequest(function() {
   var url = $('#rss-feed-url').val();
    
@@ -200,6 +195,7 @@ function save(notifyComplete) {
       title: $('#title-clipping').val(),
       description: $('#description-clipping').val()
     },
+    offlineCache: $('input[name="offline_cache"]:checked').val() !== 'false',
     highlighting: $('input[name="highlight_style"]:checked').val(),
     overlay: {
       overlaySize: $('input[name="overlay_size"]:checked').val(),
@@ -217,8 +213,6 @@ function save(notifyComplete) {
       uniqueName: hashCode(data.rssUrl)
     }
   };
-
-  console.log(data);
 
   if (notifyComplete) {
     Fliplet.Widget.save(data).then(function() {
@@ -246,12 +240,15 @@ function loadSettings(data) {
   $('input[name="highlight_style"][value="' + rssConf.highlighting + '"]').click();
 
   //set of clipping settings
-  $('#title-clipping').val(rssConf.clippingSettings.title).trigger('change');
-  $('#description-clipping').val(rssConf.clippingSettings.description).trigger('change');
+  $('#title-clipping').val(rssConf.clippingSettings.title);
+  $('#description-clipping').val(rssConf.clippingSettings.description);
+
+  //set of offline cachine settings
+  $('input[name="offline_cache"][value="' + (typeof rssConf.offlineCache !== 'undefined' ? '' + !!rssConf.offlineCache : 'true') + '"]').prop('checked', true);
 
   //set of overlay settings
   $('input[name="overlay_size"][value="' + rssConf.overlay.overlaySize + '"]').click();
-  $('#overlay-transition').val(rssConf.overlay.overlayTransition).trigger('change');
+  $('#overlay-transition').val(rssConf.overlay.overlayTransition);
 
   //set of design settings
   $('input[name="separate_style"][value="' + rssConf.designSettings.separationType + '"]').click();
