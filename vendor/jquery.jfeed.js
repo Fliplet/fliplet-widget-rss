@@ -5,7 +5,7 @@
  */
 
 /* Custom changes
- * 
+ *
  * - Added additional thumbnail tags for scanning to fix
  *   https://github.com/Fliplet/fliplet-studio/issues/2527
  */
@@ -188,6 +188,12 @@ JAtom.prototype = {
             //description and content
             var description = jQuery(this).find('description').eq(0),
                 content = jQuery(this).find('encoded').eq(0);
+            if(typeof content === 'undefined' || content.length === 0) {
+                // Add a different way to find the <content:encoded> tag
+                content = jQuery(this).children().filter(function () {
+                    return this.tagName.indexOf('content') === 0 || this.tagName.indexOf('encoded') > -1
+                }).eq(0);
+            }
             if(typeof content === 'undefined' || content.length === 0) {
                 item.content = description.text();
                 item.descriptionOnly = true;
