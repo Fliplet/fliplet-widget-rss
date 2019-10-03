@@ -277,7 +277,15 @@ var rss = (function() {
           $('.pull-to-refresh').removeClass('refreshing').html('Tap to refresh');
         }
         processFeed(configuration);
-      }, function onError() {
+      }, function onError(e) {
+        console.error('Invalid RSS', e);
+        if (typeof Raven !== 'undefined' && Raven.captureMessage) {
+          Raven.captureMessage('Error loading RSS feed', {
+            feed: configuration.rssConf.feed.source,
+            error: e
+          });
+        }
+
         $('.rss-fail').addClass("show");
         $('.rss-fail strong').html("The URL you entered seems to lead to an invalid RSS feed or the website is offline.");
         $('.feed').removeClass('loading').addClass('loaded');
