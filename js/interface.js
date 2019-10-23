@@ -95,7 +95,7 @@ function checkRSSIsOnlineAndGetContent(url) {
     jFeedSuccess(feed, url);
   }, function onError() {
     jQuery.getFeed({
-      url: 'http://crossorigin.me/' + url,
+      url: 'https://crossorigin.me/' + url,
       success: function(result) {
         jFeedSuccess(result, url);
       },
@@ -174,7 +174,7 @@ $('#preview-overlay-animation').on('click', previewOverlayAnimation);
 
 Fliplet.Widget.onSaveRequest(function() {
   var url = $('#rss-feed-url').val();
-  
+
   if (url && !url.match(/^[a-zA-Z]+:\/\//)) {
     url = 'http://' + url;
     $('#rss-feed-url').val(url);
