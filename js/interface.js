@@ -44,6 +44,7 @@ var overlayTransitionExitMap = {
 var sampleOverlayClosing;
 
 var data = Fliplet.Widget.getData() || {};
+var widgetId = Fliplet.Widget.getDefaultId();
 
 var organizationId = Fliplet.Env.get('organizationId');
 var checkState = {
@@ -218,6 +219,7 @@ function save(notifyComplete) {
     Fliplet.Widget.save(data).then(function() {
       // Close the interface for good
       Fliplet.Widget.complete();
+      Fliplet.Studio.emit('reload-page-preview');
     });
   } else {
     // Partial save while typing/using the interface
