@@ -111,12 +111,12 @@
   text-align: center;
   padding: 15px;
   color: #C56161;
-  background: rgba(242, 222, 222, 0.9);
+  background: #f2dede;
   border: 1px solid #C56161;
   position: absolute;
   top: 10px;
   left: 0;
-  z-index: 1;
+  z-index: 3;
 }
 
 #rss-feed-settings.failed .rss-fail {
