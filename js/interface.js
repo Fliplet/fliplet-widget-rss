@@ -183,6 +183,12 @@ Fliplet.Widget.onSaveRequest(function() {
   save(true);
 });
 
+Fliplet.Widget.toggleCancelButton(false);
+Fliplet.Widget.onCancelRequest(function () {
+  Fliplet.Widget.complete();
+  Fliplet.Studio.emit('reload-page-preview');
+});
+
 function save(notifyComplete) {
 
   if (!(data.checkState === checkState.VALID)) {
