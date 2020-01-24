@@ -186,7 +186,7 @@ Fliplet.Widget.onSaveRequest(function() {
 Fliplet.Widget.toggleCancelButton(false);
 Fliplet.Widget.onCancelRequest(function () {
   Fliplet.Widget.complete();
-  Fliplet.Studio.emit('reload-page-preview');
+  Fliplet.Studio.emit('reload-widget-instance', widgetId);
 });
 
 function save(notifyComplete) {
@@ -225,7 +225,7 @@ function save(notifyComplete) {
     Fliplet.Widget.save(data).then(function() {
       // Close the interface for good
       Fliplet.Widget.complete();
-      Fliplet.Studio.emit('reload-page-preview');
+      Fliplet.Studio.emit('reload-widget-instance', widgetId);
     });
   } else {
     // Partial save while typing/using the interface
