@@ -1,8 +1,8 @@
 Fliplet.Widget.instance('rss', function (data) {
-	function init() {
-		if (!window.rssConf) {
-			window.rssConf = [];
-		}
+  function init() {
+    if (!window.rssConf) {
+      window.rssConf = [];
+    }
 
     window.rssConf.push(data);
     window.reloadTime = null;
@@ -10,7 +10,7 @@ Fliplet.Widget.instance('rss', function (data) {
     // multiple event prevention
     var currentTime = new Date();
 		
-		if (currentTime - window.reloadTime < 1000) {
+    if (currentTime - window.reloadTime < 1000) {
       return;
     }
 
