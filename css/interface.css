@@ -10,6 +10,16 @@
   margin-top: 10px;
 }
 
+.titles {
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.rss-url-text {
+  margin-top: 20px;
+}
+
 /* Layout Settings */
 #rss-layout .layout-holder {
   display: inline-block;
@@ -20,6 +30,7 @@
 }
 
 #rss-layout-styles input[type="radio"] + label .help-block {
+  font-weight: normal;
   margin-bottom: 0;
 }
 
