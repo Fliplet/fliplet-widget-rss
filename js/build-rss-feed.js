@@ -90,13 +90,14 @@ var rss = (function() {
       // Register a helper
       Handlebars.registerHelper('clipping', function(clippingValue) {
         // clippingValue is the argument passed to the helper when called
-        if (clippingValue === 'none') {
-          return 'hidden';
-        } else if (clippingValue === 'no-clip') {
-          return 'all';
+        switch (clippingValue) {
+          case 'none':
+            return 'hidden';
+          case 'no-clip':
+            return 'all';
+          default:
+            return 'clip ' + clippingValue;
         }
-
-        return 'clip ' + clippingValue;
       });
 
       // Register a helper
