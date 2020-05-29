@@ -1,44 +1,44 @@
 var overlayTransitionExitMap = {
-  "bounce": "zoomOut",
-  "flash": "zoomOut",
-  "pulse": "zoomOut",
-  "rubberBand": "zoomOut",
-  "shake": "hinge",
-  "swing": "hinge",
-  "tada": "zoomOut",
-  "wobble": "zoomOut",
-  "bounceIn": "bounceOut",
-  "bounceInDown": "bounceOutUp",
-  "bounceInLeft": "bounceOutLeft",
-  "bounceInRight": "bounceOutRight",
-  "bounceInUp": "bounceOutDown",
-  "fadeIn": "fadeOut",
-  "fadeInDown": "fadeOutUp",
-  "fadeInDownBig": "fadeOutUpBig",
-  "fadeInLeft": "fadeOutLeft",
-  "fadeInLeftBig": "fadeOutLeftBig",
-  "fadeInRight": "fadeOutRight",
-  "fadeInRightBig": "fadeOutRightBig",
-  "fadeInUp": "fadeOutDown",
-  "fadeInUpBig": "fadeOutDownBig",
-  "flipInX": "flipOutX",
-  "flipInY": "flipOutY",
-  "lightSpeedIn": "lightSpeedOut",
-  "rotateIn": "rotateOut",
-  "rotateInDownLeft": "rotateOutUpLeft",
-  "rotateInDownRight": "rotateOutUpRight",
-  "rotateInUpLeft": "rotateOutDownLeft",
-  "rotateInUpRight": "rotateOutDownRight",
-  "zoomIn": "zoomOut",
-  "zoomInDown": "zoomOutUp",
-  "zoomInLeft": "zoomOutLeft",
-  "zoomInRight": "zoomOutRight",
-  "zoomInUp": "zoomOutDown",
-  "slideInDown": "slideOutUp",
-  "slideInLeft": "slideOutLeft",
-  "slideInRight": "slideOutRight",
-  "slideInUp": "slideOutDown",
-  "rollIn": "rollOut"
+  'bounce': 'zoomOut',
+  'flash': 'zoomOut',
+  'pulse': 'zoomOut',
+  'rubberBand': 'zoomOut',
+  'shake': 'hinge',
+  'swing': 'hinge',
+  'tada': 'zoomOut',
+  'wobble': 'zoomOut',
+  'bounceIn': 'bounceOut',
+  'bounceInDown': 'bounceOutUp',
+  'bounceInLeft': 'bounceOutLeft',
+  'bounceInRight': 'bounceOutRight',
+  'bounceInUp': 'bounceOutDown',
+  'fadeIn': 'fadeOut',
+  'fadeInDown': 'fadeOutUp',
+  'fadeInDownBig': 'fadeOutUpBig',
+  'fadeInLeft': 'fadeOutLeft',
+  'fadeInLeftBig': 'fadeOutLeftBig',
+  'fadeInRight': 'fadeOutRight',
+  'fadeInRightBig': 'fadeOutRightBig',
+  'fadeInUp': 'fadeOutDown',
+  'fadeInUpBig': 'fadeOutDownBig',
+  'flipInX': 'flipOutX',
+  'flipInY': 'flipOutY',
+  'lightSpeedIn': 'lightSpeedOut',
+  'rotateIn': 'rotateOut',
+  'rotateInDownLeft': 'rotateOutUpLeft',
+  'rotateInDownRight': 'rotateOutUpRight',
+  'rotateInUpLeft': 'rotateOutDownLeft',
+  'rotateInUpRight': 'rotateOutDownRight',
+  'zoomIn': 'zoomOut',
+  'zoomInDown': 'zoomOutUp',
+  'zoomInLeft': 'zoomOutLeft',
+  'zoomInRight': 'zoomOutRight',
+  'zoomInUp': 'zoomOutDown',
+  'slideInDown': 'slideOutUp',
+  'slideInLeft': 'slideOutLeft',
+  'slideInRight': 'slideOutRight',
+  'slideInUp': 'slideOutDown',
+  'rollIn': 'rollOut'
 };
 
 var sampleOverlayClosing;
@@ -46,7 +46,6 @@ var sampleOverlayClosing;
 var data = Fliplet.Widget.getData() || {};
 var widgetId = Fliplet.Widget.getDefaultId();
 
-var organizationId = Fliplet.Env.get('organizationId');
 var checkState = {
   NOT_VALID: 1,
   IN_VALIDATION: 2,
@@ -56,7 +55,6 @@ var feedCheckTimeout; // For delay URL check
 var URLContent; // For storing last checked content
 
 function jFeedSuccess(result, url) {
-
   var settingsArea = $('#rss-feed-settings');
 
   if (typeof result.link === 'string') {
@@ -111,7 +109,7 @@ function checkRSSIsOnlineAndGetContent(url) {
 function hashCode(s) {
   return s.split('').reduce(function(a, b) {
     a = ((a << 5) - a) + b.charCodeAt(0);
-    return a & a
+    return a & a;
   }, 0);
 }
 
@@ -147,7 +145,6 @@ $('#rss-feed-url').on('keyup blur change paste input', function() {
       URLContent = url;
       checkRSSIsOnlineAndGetContent(url);
     }
-
   }, 1000); // Timeout to delay URL check
 });
 
@@ -184,13 +181,12 @@ Fliplet.Widget.onSaveRequest(function() {
 });
 
 Fliplet.Widget.toggleCancelButton(false);
-Fliplet.Widget.onCancelRequest(function () {
+Fliplet.Widget.onCancelRequest(function() {
   Fliplet.Widget.complete();
   Fliplet.Studio.emit('reload-widget-instance', widgetId);
 });
 
 function save(notifyComplete) {
-
   if (!(data.checkState === checkState.VALID)) {
     return;
   }
@@ -236,42 +232,41 @@ function save(notifyComplete) {
 }
 
 function loadSettings(data) {
-
   if (!('rssConf' in data)) {
     return false;
   }
 
   data.checkState = checkState.VALID;
   var rssConf = data.rssConf;
-  //rss and highlight settings
+  // rss and highlight settings
   $('input[name="rss_layout_style"][value="' + rssConf.feedLayout + '"]').click();
   $('input[name="highlight_style"][value="' + rssConf.highlighting + '"]').click();
 
-  //set of clipping settings
+  // set of clipping settings
   $('#title-clipping').val(rssConf.clippingSettings.title);
   $('#description-clipping').val(rssConf.clippingSettings.description);
 
-  //set of offline cachine settings
+  // set of offline cachine settings
   $('input[name="offline_cache"][value="' + (typeof rssConf.offlineCache !== 'undefined' ? '' + !!rssConf.offlineCache : 'true') + '"]').prop('checked', true);
 
-  //set of overlay settings
+  // set of overlay settings
   $('input[name="overlay_size"][value="' + rssConf.overlay.overlaySize + '"]').click();
   $('#overlay-transition').val(rssConf.overlay.overlayTransition);
 
-  //set of design settings
+  // set of design settings
   $('input[name="separate_style"][value="' + rssConf.designSettings.separationType + '"]').click();
 
-  //set of feedURL
+  // set of feedURL
   data.rssUrl = rssConf.feed.source;
   $('#rss-feed-url').val(rssConf.feed.source);
   $('#rss-feed-settings').removeClass('checking').removeClass('failed').addClass('active checked');
 }
 
 function previewOverlayAnimation() {
-  var $sampleOverlay = $('#sample-overlay'),
-    $sampleOverlayPanel = $sampleOverlay.find('.overlay-panel'),
-    selectedAnimation = $('#overlay-transition').val(),
-    autoCloseSampleOverlay = true;
+  var $sampleOverlay = $('#sample-overlay');
+  var $sampleOverlayPanel = $sampleOverlay.find('.overlay-panel');
+  var selectedAnimation = $('#overlay-transition').val();
+  var autoCloseSampleOverlay = true;
 
   $sampleOverlayPanel.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
     $sampleOverlayPanel.removeClass('animated');
@@ -291,10 +286,10 @@ function previewOverlayAnimation() {
 }
 
 function closeOverlayPreview() {
-  var $sampleOverlay = $('#sample-overlay'),
-    $sampleOverlayPanel = $sampleOverlay.find('.overlay-panel'),
-    selectedAnimation = $('#overlay-transition').val(),
-    exitAnimation = overlayTransitionExitMap[selectedAnimation];
+  var $sampleOverlay = $('#sample-overlay');
+  var $sampleOverlayPanel = $sampleOverlay.find('.overlay-panel');
+  var selectedAnimation = $('#overlay-transition').val();
+  var exitAnimation = overlayTransitionExitMap[selectedAnimation];
 
   if (!sampleOverlayClosing || typeof sampleOverlayClosing === 'undefined') {
     sampleOverlayClosing = true;

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 this["Fliplet"] = this["Fliplet"] || {};
 this["Fliplet"]["Widget"] = this["Fliplet"]["Widget"] || {};
 this["Fliplet"]["Widget"]["Templates"] = this["Fliplet"]["Widget"]["Templates"] || {};

@@ -1,3 +1,5 @@
+/* eslint-disable valid-jsdoc */
+// eslint-disable-next-line no-unused-vars
 var rss = (function() {
   // Universal _this reference
   var _this;
@@ -19,7 +21,6 @@ var rss = (function() {
     });
 
     $('.pull-to-refresh').on('click', function() {
-
       var $this = $(this);
 
       $this.addClass('refreshing').html('Refreshing');
@@ -35,20 +36,15 @@ var rss = (function() {
       }
     });
 
-    var $body = $('body');
-
     this.setup(configuration);
-
   };
 
   // prototype
   rss.prototype = {
     constructor: rss,
     setup: function(configuration) {
-
       $(document).ready(function() {
-
-        //valid connection logic
+        // valid connection logic
         if (_this.online) {
           checkConnection(true, configuration);
         } else {
@@ -70,7 +66,6 @@ var rss = (function() {
     registerHandlebarsMethods: function() {
       // Register a helper
       Handlebars.registerHelper('safeString', function(content) {
-
         return new Handlebars.SafeString(content);
       });
 
@@ -95,7 +90,13 @@ var rss = (function() {
       // Register a helper
       Handlebars.registerHelper('clipping', function(clippingValue) {
         // clippingValue is the argument passed to the helper when called
-        return clippingValue === 'none' ? 'hidden' : clippingValue === 'no-clip' ? 'all' : "clip " + clippingValue;
+        if (clippingValue === 'none') {
+          return 'hidden';
+        } else if (clippingValue === 'no-clip') {
+          return 'all';
+        }
+
+        return 'clip ' + clippingValue;
       });
 
       // Register a helper
@@ -105,14 +106,14 @@ var rss = (function() {
       });
 
 
-      Handlebars.registerHelper("debug", function(optionalValue) {
-        console.log("Current Context");
-        console.log("====================");
+      Handlebars.registerHelper('debug', function(optionalValue) {
+        console.log('Current Context');
+        console.log('====================');
         console.log(this);
 
         if (optionalValue) {
-          console.log("Value");
-          console.log("====================");
+          console.log('Value');
+          console.log('====================');
           console.log(optionalValue);
         }
       });
@@ -151,33 +152,31 @@ var rss = (function() {
    * method used to initialize the rss plugin Persistence variable
    */
 
-  function setUserDataPV(success_callback, fail_callback) {
+  function setUserDataPV(successCallback, failCallback) {
     var structure = {
       feeds: []
     };
 
-    window.pvName = "rss_data_" + Fliplet.Env.get('appId');
+    window.pvName = 'rss_data_' + Fliplet.Env.get('appId');
     Fliplet.Security.Storage.create(pvName, structure).then(function(data) {
       window.pvObj = data;
-      success_callback();
-    }, fail_callback);
-
+      successCallback();
+    }, failCallback);
   }
 
   function initializePV(configuration) {
-
     Fliplet.Security.Storage.init().then(function() {
       setUserDataPV(function() {
         var feedsInUse = [];
+
         if (typeof pvObj.feeds === 'undefined' || pvObj.feeds.length === 0) {
           $('.feed').addClass('loading');
           pvObj.feeds = [];
-
         }
 
         for (var i = 0; i < configuration.length; i++) {
-          var feedConf = configuration[i],
-            feedPV = getFeedPV(feedConf.rssConf.feed.uniqueName, pvObj);
+          var feedConf = configuration[i];
+          var feedPV = getFeedPV(feedConf.rssConf.feed.uniqueName, pvObj);
 
           if (!feedPV) {
             var now = moment();
@@ -271,15 +270,15 @@ var rss = (function() {
         configuration.items = feed.items;
         configuration.updatedTime = now;
         Fliplet.Security.Storage.update();
-        $('.rss-fail').removeClass("show");
+        $('.rss-fail').removeClass('show');
         $('.feed').removeClass('loading');
         if ($('.pull-to-refresh').hasClass('refreshing')) {
           $('.pull-to-refresh').removeClass('refreshing').html('Tap to refresh');
         }
         processFeed(configuration);
       }, function onError() {
-        $('.rss-fail').addClass("show");
-        $('.rss-fail strong').html("The URL you entered seems to lead to an invalid RSS feed or the website is offline.");
+        $('.rss-fail').addClass('show');
+        $('.rss-fail strong').html('The URL you entered seems to lead to an invalid RSS feed or the website is offline.');
         $('.feed').removeClass('loading').addClass('loaded');
         if ($('.pull-to-refresh').hasClass('refreshing')) {
           $('.pull-to-refresh').removeClass('refreshing').html('Tap to refresh');
@@ -320,14 +319,13 @@ var rss = (function() {
     var failDiv = $('.rss-fail');
 
     if (typeof rssConfiguration.items !== 'undefined') {
-
       if (rssConfiguration.items.length === 0) {
-        failDiv.addClass("show");
-        $('.rss-fail strong').html("The RSS feed is empty.");
+        failDiv.addClass('show');
+        $('.rss-fail strong').html('The RSS feed is empty.');
         return;
       }
 
-      failDiv.removeClass("show");
+      failDiv.removeClass('show');
 
       $('.feed').removeClass('loading').addClass('loaded');
       // Add the compiled html to the page
@@ -339,17 +337,17 @@ var rss = (function() {
         var rssFeed = getFeedPV(rssConfig.rssConf.feed.uniqueName, window.pvObj);
         var listItem = rssFeed.items[itemIndex];
         var title = listItem.title;
-        var content = "<div>" + listItem.content + "</div>";
-        var overlayContent = "<h1>" + title + "</h1>" + content;
+        var content = '<div>' + listItem.content + '</div>';
+        var overlayContent = '<h1>' + title + '</h1>' + content;
 
-        //read and unread state.
+        // read and unread state.
         listItem.read = true;
         $(this).removeClass(rssConfig.rssConf.highlighting);
         Fliplet.Security.Storage.update();
 
         if (rssConfig.rssConf.offlineCache === false) {
           if (!Fliplet.Navigator.isOnline()) {
-            Fliplet.UI.Toast('Device offline. Try again later.')
+            Fliplet.UI.Toast('Device offline. Try again later.');
             return;
           }
           Fliplet.Navigate.url(listItem.link);
@@ -397,5 +395,3 @@ FlipletFeed.prototype = {
   overlayTransition: '',
   uuid: ''
 };
-
-/*****************************************/

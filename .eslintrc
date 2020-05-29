@@ -1,0 +1,9 @@
+{
+  "extends": "fliplet",
+  "globals": {
+    "JFeed": true,
+    "rss": true,
+    "pvObj": true,
+    "pvName": true
+  }
+}  
