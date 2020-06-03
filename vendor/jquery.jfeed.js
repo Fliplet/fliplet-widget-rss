@@ -10,6 +10,8 @@
  *   https://github.com/Fliplet/fliplet-studio/issues/2527
  */
 
+/* eslint-disable */
+
 function getItemThumbnail(item) {
     var thumbnailPaths = [
         {

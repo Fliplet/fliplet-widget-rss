@@ -1,4 +1,4 @@
-Fliplet.Widget.instance('rss', function (data) {
+Fliplet.Widget.instance('rss', function(data) {
   function init() {
     if (!window.rssConf) {
       window.rssConf = [];
@@ -9,12 +9,12 @@ Fliplet.Widget.instance('rss', function (data) {
 
     // multiple event prevention
     var currentTime = new Date();
-		
+
     if (currentTime - window.reloadTime < 1000) {
       return;
     }
 
-    if (typeof window.rssInit === "undefined") {
+    if (typeof window.rssInit === 'undefined') {
       window.rssInit = new rss(window.rssConf);
     } else {
       window.rssInit.setup(window.rssConf);
@@ -23,7 +23,7 @@ Fliplet.Widget.instance('rss', function (data) {
     window.reloadTime = currentTime;
   }
 
-  Fliplet().then(function () {
+  Fliplet().then(function() {
     init();
   });
 });
