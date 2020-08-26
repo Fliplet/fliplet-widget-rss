@@ -230,15 +230,12 @@
 
 .rss-fail {
 	display: none;
-	width: 400px;
 	text-align: center;
-	padding: 15px;
+	padding: 90px 15px 45px;
 	color: #333;
 	background: rgba(255, 255, 255, 0.9);
 	border: 1px solid #FFF;
-	position: absolute;
-	top: 90px;
-	left: calc(50% - 200px);
+	clear: both;
 	z-index: 1;
 }
 
