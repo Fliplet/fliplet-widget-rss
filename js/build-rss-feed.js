@@ -258,14 +258,17 @@ var rss = (function() {
       }).then(function(response) {
         var feed = new JFeed(response);
         var now = moment();
+
         if (typeof rssPV.items !== 'undefined') {
           collectReadStatesFromOld(rssPV.items, feed.items);
         }
+
         // Trim feed items
         for (var i = 0; i < feed.items.length; i++) {
           feed.items[i].description = feed.items[i].description.trim();
           feed.items[i].title = feed.items[i].title.trim();
         }
+
         rssPV.items = feed.items;
         rssPV.updatedTime = now;
         configuration.items = feed.items;
@@ -273,14 +276,19 @@ var rss = (function() {
         Fliplet.Security.Storage.update();
         $('.rss-fail').removeClass('show');
         $('.feed').removeClass('loading');
+
         if ($('.pull-to-refresh').hasClass('refreshing')) {
           $('.pull-to-refresh').removeClass('refreshing').html('Tap to refresh');
         }
+
         processFeed(configuration);
-      }, function onError() {
+      }).catch(function onError(error) {
+        var errorMessage = Fliplet.parseError(error, 'RSS feed appears to be invalid or offline.');
+
         $('.rss-fail').addClass('show');
-        $('.rss-fail strong').html('The URL you entered seems to lead to an invalid RSS feed or the website is offline.');
+        $('.rss-fail strong').html(errorMessage);
         $('.feed').removeClass('loading').addClass('loaded');
+
         if ($('.pull-to-refresh').hasClass('refreshing')) {
           $('.pull-to-refresh').removeClass('refreshing').html('Tap to refresh');
         }

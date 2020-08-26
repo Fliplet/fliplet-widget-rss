@@ -134,6 +134,9 @@ JFeed.prototype = {
 
             this.type = 'atom';
             var feedClass = new JAtom(xml);
+        } else {
+
+            throw new Error('Invalid RSS feed. The XML feed must contain a root &lt;channel&gt; or &lt;feed&gt;.');
         }
 
         if (feedClass) jQuery.extend(this, feedClass);

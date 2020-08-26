@@ -54,11 +54,10 @@ var checkState = {
 var feedCheckTimeout; // For delay URL check
 var URLContent; // For storing last checked content
 
-function jFeedSuccess(result, url) {
+function jFeedSuccess(result) {
   var settingsArea = $('#rss-feed-settings');
 
   if (typeof result.link === 'string') {
-    data.rssUrl = url;
     data.checkState = checkState.VALID;
     settingsArea.removeClass('checking').removeClass('failed').addClass('active checked');
   } else {
@@ -85,22 +84,32 @@ function checkRSSIsOnlineAndGetContent(url) {
     return;
   }
 
+  data.rssUrl = url;
+
   Fliplet.API.request({
     dataType: 'xml',
     url: 'v1/communicate/proxy/' + encodeURIComponent(url)
   }).then(function(response) {
     var feed = new JFeed(response);
+
     jFeedSuccess(feed, url);
-  }, function onError() {
+  }).catch(function onError(error) {
     jQuery.getFeed({
       url: 'https://crossorigin.me/' + url,
       success: function(result) {
         jFeedSuccess(result, url);
       },
       error: function() {
+        var defaultError = 'Feed URL appeasr to be invalid or offline. Please verify the URL and try again.';
+
         data.checkState = checkState.NOT_VALID;
         settingsArea.removeClass('checking').addClass('failed');
-        $('.rss-fail strong').html('The URL you entered seems to lead to an invalid RSS feed or the website is offline. Please verify the URL and try again.');
+
+        if (error.status >= 400) {
+          error = defaultError;
+        }
+
+        $('.rss-fail strong').html(Fliplet.parseError(error, defaultError));
       }
     });
   });
@@ -112,6 +121,33 @@ function hashCode(s) {
     return a & a;
   }, 0);
 }
+
+function debouncedRSSValidation() {
+  var url = $('#rss-feed-url').val().trim();
+
+  if (feedCheckTimeout) {
+    clearTimeout(feedCheckTimeout);
+    feedCheckTimeout = null;
+  }
+
+  feedCheckTimeout = setTimeout(function() {
+    if (url && !url.match(/^[a-zA-Z]+:\/\//)) {
+      url = 'http://' + url;
+      $('#rss-feed-url').val(url);
+    }
+
+    // Checks if URL has changed since last check
+    if (url !== URLContent) {
+      URLContent = url;
+      checkRSSIsOnlineAndGetContent(url);
+    }
+  }, 500); // Timeout to delay URL check
+}
+
+$('#form').on('submit', function (e) {
+  e.preventDefault();
+  debouncedRSSValidation();
+});
 
 $('#rss-layout input[name="rss_layout_style"]').on('change', function() {
   $('#rss-layout-control').removeClass('active');
@@ -130,22 +166,7 @@ $('#rss-layout input[name="rss_layout_style"]').on('change', function() {
 
 // URL Check
 $('#rss-feed-url').on('keyup blur change paste input', function() {
-  var _this = $(this);
-  var url = _this.val().trim();
-
-  clearTimeout(feedCheckTimeout);
-  feedCheckTimeout = setTimeout(function() {
-    if (url && !url.match(/^[a-zA-Z]+:\/\//)) {
-      url = 'http://' + url;
-      _this.val(url);
-    }
-
-    // Checks if URL has changed since last check
-    if (url !== URLContent) {
-      URLContent = url;
-      checkRSSIsOnlineAndGetContent(url);
-    }
-  }, 1000); // Timeout to delay URL check
+  debouncedRSSValidation();
 });
 
 // Change state of highlight styles
@@ -187,48 +208,64 @@ Fliplet.Widget.onCancelRequest(function() {
 });
 
 function save(notifyComplete) {
+  var validateFeed = Promise.resolve(false);
+
   if (!(data.checkState === checkState.VALID)) {
-    return;
+    validateFeed = Fliplet.Modal.confirm({
+      title: 'Invalid RSS feed',
+      message: 'Please make sure the feed is valid before continuing',
+      buttons: {
+        cancel: {
+          label: 'Save anyway'
+        }
+      }
+    });
   }
 
-  data.overlayTransition = $('#overlay-transition').val();
-  data.rssConf = {
-    feedLayout: $('input[name="rss_layout_style"]:checked').val(),
-    clippingSettings: {
-      title: $('#title-clipping').val(),
-      description: $('#description-clipping').val()
-    },
-    offlineCache: $('input[name="offline_cache"]:checked').val() !== 'false',
-    highlighting: $('input[name="highlight_style"]:checked').val(),
-    overlay: {
-      overlaySize: $('input[name="overlay_size"]:checked').val(),
-      overlayTransition: data.overlayTransition,
-      overlayTransitionExit: overlayTransitionExitMap[data.overlayTransition]
-    },
-    designSettings: {
-      separationType: $('input[name="separate_style"]:checked').val()
-    },
-    feed: {
-      id: data.id !== null
-        ? data.id
-        : new Date().getTime(),
-      source: data.rssUrl,
-      uniqueName: hashCode(data.rssUrl)
+  validateFeed.then(function (feedIsInavlid) {
+    if (feedIsInavlid) {
+      return;
     }
-  };
 
-  if (notifyComplete) {
-    Fliplet.Widget.save(data).then(function() {
-      // Close the interface for good
-      Fliplet.Widget.complete();
-      Fliplet.Studio.emit('reload-widget-instance', widgetId);
-    });
-  } else {
-    // Partial save while typing/using the interface
-    Fliplet.Widget.save(data).then(function() {
-      Fliplet.Studio.emit('reload-widget-instance', widgetId);
-    });
-  }
+    data.overlayTransition = $('#overlay-transition').val();
+    data.rssConf = {
+      feedLayout: $('input[name="rss_layout_style"]:checked').val(),
+      clippingSettings: {
+        title: $('#title-clipping').val(),
+        description: $('#description-clipping').val()
+      },
+      offlineCache: $('input[name="offline_cache"]:checked').val() !== 'false',
+      highlighting: $('input[name="highlight_style"]:checked').val(),
+      overlay: {
+        overlaySize: $('input[name="overlay_size"]:checked').val(),
+        overlayTransition: data.overlayTransition,
+        overlayTransitionExit: overlayTransitionExitMap[data.overlayTransition]
+      },
+      designSettings: {
+        separationType: $('input[name="separate_style"]:checked').val()
+      },
+      feed: {
+        id: data.id !== null
+          ? data.id
+          : new Date().getTime(),
+        source: data.rssUrl,
+        uniqueName: hashCode(data.rssUrl)
+      }
+    };
+
+    if (notifyComplete) {
+      Fliplet.Widget.save(data).then(function() {
+        // Close the interface for good
+        Fliplet.Widget.complete();
+        Fliplet.Studio.emit('reload-widget-instance', widgetId);
+      });
+    } else {
+      // Partial save while typing/using the interface
+      Fliplet.Widget.save(data).then(function() {
+        Fliplet.Studio.emit('reload-widget-instance', widgetId);
+      });
+    }
+  });
 }
 
 function loadSettings(data) {
@@ -257,7 +294,6 @@ function loadSettings(data) {
   $('input[name="separate_style"][value="' + rssConf.designSettings.separationType + '"]').click();
 
   // set of feedURL
-  data.rssUrl = rssConf.feed.source;
   $('#rss-feed-url').val(rssConf.feed.source);
   $('#rss-feed-settings').removeClass('checking').removeClass('failed').addClass('active checked');
 }
