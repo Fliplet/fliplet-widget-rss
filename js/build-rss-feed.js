@@ -56,11 +56,13 @@ var rss = (function() {
     // Show the offline message
     showOfflineMessage: function() {
       var $offlineWarning = $('.offline-notification');
+
       $offlineWarning.addClass('offline');
     },
 
     removeOfflineMessage: function() {
       var $offlineWarning = $('.offline-notification');
+
       $offlineWarning.removeClass('offline');
     },
     registerHandlebarsMethods: function() {
@@ -131,18 +133,21 @@ var rss = (function() {
     if (Fliplet.Navigator.isOnline()) {
       _this.removeOfflineMessage();
       _this.online = true;
+
       if (onInit) {
         initializePV(configuration);
       }
     } else if (_this.online) {
       _this.removeOfflineMessage();
       _this.online = true;
+
       if (onInit) {
         initializePV(configuration);
       }
     } else {
       _this.showOfflineMessage();
       _this.online = false;
+
       if (onInit) {
         initializePV(configuration);
       }
@@ -181,6 +186,7 @@ var rss = (function() {
 
           if (!feedPV) {
             var now = moment();
+
             feedPV = new FlipletFeed(feedConf.rssConf, feedConf.rssConf.feed.source, now, [], feedConf.rssConf.feed.uniqueName, feedConf.overlayTransition, feedConf.uuid);
             pvObj.feeds.push(feedPV);
           }
@@ -192,6 +198,7 @@ var rss = (function() {
         removeUnusedFeedsFromPV(feedsInUse);
       }, function() {
         alert('Error message here', function() {}, 'Error', 'Close');
+
         return false;
       });
     });
@@ -203,15 +210,18 @@ var rss = (function() {
    */
   function removeUnusedFeedsFromPV(feedsInUse) {
     var inUse = false;
+
     for (var j = 0; j < window.pvObj.feeds; j++) {
       for (var w = 0; w < feedsInUse.length; w++) {
         if (feedsInUse[j] === window.pvObj.feeds[w].feed.uniqueName) {
           inUse = true;
         }
       }
+
       window.pvObj.feeds.remove(w);
     }
   }
+
   /**
    * based on a unique name get the feed Persistence variable with that uniqueName
    * @param feedUniqueName feed unique name
@@ -224,6 +234,7 @@ var rss = (function() {
         return rssPVs.feeds[j];
       }
     }
+
     return false;
   }
 
@@ -238,6 +249,7 @@ var rss = (function() {
         return window.rssConf[j];
       }
     }
+
     return false;
   }
 
@@ -304,9 +316,11 @@ var rss = (function() {
   function collectReadStatesFromOld(oldItems, newItems) {
     for (var i = 0; i < oldItems.length; i++) {
       var oldItem = oldItems[i];
+
       if (typeof oldItem.read !== 'undefined' && oldItem.read) {
         for (var j = 0; j < newItems.length; j++) {
           var newItem = newItems[j];
+
           if (newItem.link === oldItem.link) {
             newItem.read = oldItem.read;
             break;
@@ -331,6 +345,7 @@ var rss = (function() {
       if (rssConfiguration.items.length === 0) {
         failDiv.addClass('show');
         $('.rss-fail strong').html('The RSS feed is empty.');
+
         return;
       }
 
@@ -357,9 +372,12 @@ var rss = (function() {
         if (rssConfig.rssConf.offlineCache === false) {
           if (!Fliplet.Navigator.isOnline()) {
             Fliplet.UI.Toast('Device offline. Try again later.');
+
             return;
           }
+
           Fliplet.Navigate.url(listItem.link);
+
           return;
         }
 
