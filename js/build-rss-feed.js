@@ -38,6 +38,19 @@ var rss = (function() {
     this.setup(configuration);
   };
 
+  /**
+   * Clean up content in case there are incomplete HTML tags
+   * @param {String} str - CData content
+   * @returns {String} Cleaned up content
+   */
+  function cleanCData(str) {
+    var $div = $('<div></div>');
+
+    $div.html(str || '');
+
+    return $div.html().trim();
+  }
+
   // prototype
   rss.prototype = {
     constructor: rss,
@@ -279,8 +292,8 @@ var rss = (function() {
 
         // Trim feed items
         for (var i = 0; i < feed.items.length; i++) {
-          feed.items[i].description = feed.items[i].description.trim();
-          feed.items[i].title = feed.items[i].title.trim();
+          feed.items[i].description = cleanCData(feed.items[i].description);
+          feed.items[i].title = cleanCData(feed.items[i].title);
         }
 
         rssPV.items = feed.items;
