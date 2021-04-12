@@ -1,4 +1,3 @@
-/* eslint-disable valid-jsdoc */
 // eslint-disable-next-line no-unused-vars
 var rss = (function() {
   // Universal _this reference
@@ -126,8 +125,9 @@ var rss = (function() {
   /**
    * Method that checks the device connection.
    * If on page init initializes the Persistence variable.
-   * @param onInit {boolean} flag to signal page init
-   * @param configuration {Object} rssConf to be passed to the initializedPV();
+   * @param {Boolean} onInit - flag to signal page init
+   * @param {Object} configuration - rssConf to be passed to the initializedPV();
+   * @return {void}
    */
   function checkConnection(onInit, configuration) {
     if (Fliplet.Navigator.isOnline()) {
@@ -206,7 +206,8 @@ var rss = (function() {
 
   /**
    * removes feeds fom Persistence variables that are not in use.
-   * @param feedsInUse feeds in the configuration.
+   * @param {String[]} feedsInUse - feeds in the configuration.
+   * @return {void}
    */
   function removeUnusedFeedsFromPV(feedsInUse) {
     var inUse = false;
@@ -224,9 +225,9 @@ var rss = (function() {
 
   /**
    * based on a unique name get the feed Persistence variable with that uniqueName
-   * @param feedUniqueName feed unique name
-   * @param rssPVs persistence variable with feeds available
-   * @returns {*}
+   * @param {String} feedUniqueName - feed unique name
+   * @param {Object} rssPVs - persistence variable with feeds available
+   * @return {*} A feed object or FALSE if it's not found
    */
   function getFeedPV(feedUniqueName, rssPVs) {
     for (var j = 0; j < rssPVs.feeds.length; j++) {
@@ -240,8 +241,8 @@ var rss = (function() {
 
   /**
    * based on a configuration id gets the feed with that configuration.
-   * @param configId configuration id of the wanted configuration.
-   * @returns {*} configuration if exists, false if none
+   * @param {Number} configId - configuration id of the wanted configuration.
+   * @return {*} configuration if exists, false if none
    */
   function getFeedConfiguration(configId) {
     for (var j = 0; j < window.rssConf.length; j++) {
@@ -255,8 +256,9 @@ var rss = (function() {
 
   /**
    * Based on the persistence Variable loads a new RSS content or the old one in case of an Offline device;
-   * @param configuration recent feed configuration.
-   * @param rssPV RSS persistence Variable.
+   * @param {Object} configuration - recent feed configuration.
+   * @param {Object} rssPV - RSS persistence Variable.
+   * @return {void}
    */
   function loadRSS(configuration, rssPV) {
     if (!_this.online) {
@@ -310,8 +312,9 @@ var rss = (function() {
 
   /**
    * Used to pass on the old rss items read states to the newer list;
-   * @param oldItems old items to process
-   * @param newItems new items to pass on the read state
+   * @param {Object[]} oldItems - old items to process
+   * @param {Object[]} newItems - new items to pass on the read state
+   * @return {void}
    */
   function collectReadStatesFromOld(oldItems, newItems) {
     for (var i = 0; i < oldItems.length; i++) {
@@ -336,7 +339,8 @@ var rss = (function() {
 
   /**
    * Based on the persistence variable e.g RSS configurations and items renders the handlebars template
-   * @param rssConfiguration rss Persistence Variable
+   * @param {Object} rssConfiguration - rss Persistence Variable
+   * @return {void}
    */
   function processFeed(rssConfiguration) {
     var failDiv = $('.rss-fail');
