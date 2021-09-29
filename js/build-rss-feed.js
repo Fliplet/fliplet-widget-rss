@@ -319,7 +319,7 @@ var rss = (function() {
         $('.feed').removeClass('loading').addClass('loaded');
 
         if ($('.pull-to-refresh').hasClass('refreshing')) {
-          $('.pull-to-refresh').removeClass('refreshing').html(T('widgets.rssFeed.actions.refres'));
+          $('.pull-to-refresh').removeClass('refreshing').html(T('widgets.rssFeed.actions.refresh'));
         }
       });
     }
