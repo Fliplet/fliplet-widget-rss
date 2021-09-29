@@ -312,7 +312,7 @@ var rss = (function() {
 
         processFeed(configuration);
       }).catch(function onError(error) {
-        var errorMessage = Fliplet.parseError(error, T('widgets.rssFeed.errors.invalidAppears'));
+        var errorMessage = Fliplet.parseError(error, T('widgets.rssFeed.errors.rssOfflineOrInvalid'));
 
         $('.rss-fail').addClass('show');
         $('.rss-fail strong').html(errorMessage);

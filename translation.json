@@ -2,7 +2,7 @@
     "widgets": {
         "rssFeed": {
             "offline": "Your device is offline",
-            "message": "We’re loading the feed for the first time. This will take just a couple of minutes.",
+            "loading": "We’re loading the feed for the first time. This will take just a couple of minutes.",
             "actions": {
                 "refresh": "Tap to refresh",
                 "refreshing": "Refreshing",
@@ -10,8 +10,8 @@
                 "close": "Close"
             },
             "errors": {
-                "invalidRSSFeed": "We were unable to retrieve your RSS feed. Please try again.",
-                "invalidAppears": "RSS feed appears to be invalid or offline.",
+                "loadFailed": "We were unable to retrieve your RSS feed. Please try again.",
+                "rssOfflineOrInvalid": "RSS feed appears to be invalid or offline.",
                 "emptyFeed": "The RSS feed is empty.",
                 "offline": "Device offline. Try again later."
             }
