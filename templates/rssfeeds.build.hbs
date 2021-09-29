@@ -1,9 +1,9 @@
 <div id="date">{{getUpdateValue updatedTime}}</div>
-<div class="offline-notification animated">Your device is offline</div>
+<div class="offline-notification animated">{{ T 'widgets.rssFeed.offline' }}</div>
 <div class="feed">
 
     <div class="loading-message-holder">
-        <div class="loading-message">We’re loading the feed for the first time. This will take just a couple of minutes.</div>
+        <div class="loading-message">{{ T 'widgets.rssFeed.message' }}</div>
     </div>
 
     <ul class="feed-panels {{rssConf.designSettings.separationType}} {{rssConf.feedLayout}}">
