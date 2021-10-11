@@ -119,7 +119,7 @@ var rss = (function() {
       // Register a helper
       Handlebars.registerHelper('getUpdateValue', function(date) {
         // date is the argument passed to the helper when called
-        return 'Last updated: ' + moment(new Date(date)).fromNow();
+        return T('widgets.rssFeed.lastUpdated') + Fliplet.Locale.date(date, { format: 'fromNow' });
       });
 
 

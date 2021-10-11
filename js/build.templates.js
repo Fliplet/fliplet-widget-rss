@@ -36,7 +36,7 @@ this["Fliplet"]["Widget"]["Templates"]["templates.rssfeeds"] = Handlebars.templa
     + "</div>\r\n<div class=\"offline-notification animated\">"
     + alias3((helpers.T || (depth0 && depth0.T) || alias2).call(alias1,"widgets.rssFeed.offline",{"name":"T","hash":{},"data":data}))
     + "</div>\r\n<div class=\"feed\">\r\n\r\n    <div class=\"loading-message-holder\">\r\n        <div class=\"loading-message\">"
-    + alias3((helpers.T || (depth0 && depth0.T) || alias2).call(alias1,"widgets.rssFeed.message",{"name":"T","hash":{},"data":data}))
+    + alias3((helpers.T || (depth0 && depth0.T) || alias2).call(alias1,"widgets.rssFeed.loading",{"name":"T","hash":{},"data":data}))
     + "</div>\r\n    </div>\r\n\r\n    <ul class=\"feed-panels "
     + alias3(alias4(((stack1 = ((stack1 = (depth0 != null ? depth0.rssConf : depth0)) != null ? stack1.designSettings : stack1)) != null ? stack1.separationType : stack1), depth0))
     + " "
