@@ -3,6 +3,7 @@
     "rssFeed": {
       "offline": "Your device is offline",
       "loading": "We’re loading the feed for the first time. This will take just a couple of minutes.",
+      "lastUpdated": "Last updated: ",
       "actions": {
         "refresh": "Tap to refresh",
         "refreshing": "Refreshing",
