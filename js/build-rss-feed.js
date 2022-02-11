@@ -307,7 +307,7 @@ var rss = (function() {
         $('.feed').removeClass('loading');
 
         if ($('.pull-to-refresh').hasClass('refreshing')) {
-          $('.pull-to-refresh').removeClass('refreshing').html('Tap to refresh');
+          $('.pull-to-refresh').removeClass('refreshing').html(T('widgets.rssFeed.actions.refresh'));
         }
 
         processFeed(configuration);
