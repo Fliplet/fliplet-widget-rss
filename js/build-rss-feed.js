@@ -1,5 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 var rss = (function() {
+  $(this).translate();
+
   // Universal _this reference
   var _this;
 
@@ -22,9 +24,9 @@ var rss = (function() {
     $('.pull-to-refresh').on('click', function() {
       var $this = $(this);
 
-      $this.addClass('refreshing').html('Refreshing');
+      $this.addClass('refreshing').html(T('widgets.rssFeed.actions.refreshing'));
       setTimeout(function() {
-        $this.removeClass('refreshing').html('Tap to refresh');
+        $this.removeClass('refreshing').html(T('widgets.rssFeed.actions.refresh'));
       }, 10000);
 
       var rssConfig = getFeedConfiguration($(this).data('id'));
@@ -117,7 +119,7 @@ var rss = (function() {
       // Register a helper
       Handlebars.registerHelper('getUpdateValue', function(date) {
         // date is the argument passed to the helper when called
-        return 'Last updated: ' + moment(new Date(date)).fromNow();
+        return T('widgets.rssFeed.lastUpdated') + Fliplet.Locale.date(date, { format: 'fromNow' });
       });
 
 
@@ -305,19 +307,19 @@ var rss = (function() {
         $('.feed').removeClass('loading');
 
         if ($('.pull-to-refresh').hasClass('refreshing')) {
-          $('.pull-to-refresh').removeClass('refreshing').html('Tap to refresh');
+          $('.pull-to-refresh').removeClass('refreshing').html(T('widgets.rssFeed.actions.refresh'));
         }
 
         processFeed(configuration);
       }).catch(function onError(error) {
-        var errorMessage = Fliplet.parseError(error, 'RSS feed appears to be invalid or offline.');
+        var errorMessage = Fliplet.parseError(error, T('widgets.rssFeed.errors.rssOfflineOrInvalid'));
 
         $('.rss-fail').addClass('show');
         $('.rss-fail strong').html(errorMessage);
         $('.feed').removeClass('loading').addClass('loaded');
 
         if ($('.pull-to-refresh').hasClass('refreshing')) {
-          $('.pull-to-refresh').removeClass('refreshing').html('Tap to refresh');
+          $('.pull-to-refresh').removeClass('refreshing').html(T('widgets.rssFeed.actions.refresh'));
         }
       });
     }
@@ -361,7 +363,7 @@ var rss = (function() {
     if (typeof rssConfiguration.items !== 'undefined') {
       if (rssConfiguration.items.length === 0) {
         failDiv.addClass('show');
-        $('.rss-fail strong').html('The RSS feed is empty.');
+        $('.rss-fail strong').html(T('widgets.rssFeed.errors.emptyFeed'));
 
         return;
       }
@@ -388,7 +390,7 @@ var rss = (function() {
 
         if (rssConfig.rssConf.offlineCache === false) {
           if (!Fliplet.Navigator.isOnline()) {
-            Fliplet.UI.Toast('Device offline. Try again later.');
+            Fliplet.UI.Toast(T('widgets.rssFeed.errors.offline'));
 
             return;
           }
@@ -402,11 +404,11 @@ var rss = (function() {
         new Fliplet.Utils.Overlay(overlayContent, {
           showOnInit: true,
           title: title,
-          actionText: 'Read Online',
+          actionText: T('widgets.rssFeed.actions.read'),
           actionCallback: function() {
             Fliplet.Navigate.url(listItem.link);
           },
-          closeText: 'Close',
+          closeText: T('widgets.rssFeed.actions.close'),
           size: rssConfig.rssConf.overlay.overlaySize,
           entranceAnim: rssConfig.rssConf.overlay.overlayTransition,
           exitAnim: rssConfig.rssConf.overlay.overlayTransitionExit

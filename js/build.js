@@ -1,4 +1,5 @@
 Fliplet.Widget.instance('rss', function(data) {
+  $(this).translate();
   function init() {
     if (!window.rssConf) {
       window.rssConf = [];
