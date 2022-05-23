@@ -81,6 +81,7 @@ function checkRSSIsOnlineAndGetContent(url) {
     data.checkState = checkState.NOT_VALID;
     settingsArea.removeClass('checking').addClass('failed');
     $('.rss-fail strong').html('You have entered an invalid URL. Please try again.');
+
     return;
   }
 
@@ -100,7 +101,7 @@ function checkRSSIsOnlineAndGetContent(url) {
         jFeedSuccess(result, url);
       },
       error: function() {
-        var defaultError = 'Feed URL appeasr to be invalid or offline. Please verify the URL and try again.';
+        var defaultError = 'Feed URL appears to be invalid or offline. Please verify the URL and try again.';
 
         data.checkState = checkState.NOT_VALID;
         settingsArea.removeClass('checking').addClass('failed');
@@ -118,6 +119,7 @@ function checkRSSIsOnlineAndGetContent(url) {
 function hashCode(s) {
   return s.split('').reduce(function(a, b) {
     a = ((a << 5) - a) + b.charCodeAt(0);
+
     return a & a;
   }, 0);
 }
@@ -144,7 +146,7 @@ function debouncedRSSValidation() {
   }, 500); // Timeout to delay URL check
 }
 
-$('#form').on('submit', function (e) {
+$('#form').on('submit', function(e) {
   e.preventDefault();
   debouncedRSSValidation();
 });
@@ -156,6 +158,7 @@ $('#rss-layout input[name="rss_layout_style"]').on('change', function() {
   $('#rss-settings').addClass('active');
 
   var disabledTabs = $('.nav-tabs').find('.disabled');
+
   disabledTabs.each(function() {
     $(this).removeClass('disabled');
   });
@@ -222,8 +225,8 @@ function save(notifyComplete) {
     });
   }
 
-  validateFeed.then(function (feedIsInavlid) {
-    if (feedIsInavlid) {
+  validateFeed.then(function(feedIsInvalid) {
+    if (feedIsInvalid) {
       return;
     }
 
@@ -274,7 +277,9 @@ function loadSettings(data) {
   }
 
   data.checkState = checkState.VALID;
+
   var rssConf = data.rssConf;
+
   // rss and highlight settings
   $('input[name="rss_layout_style"][value="' + rssConf.feedLayout + '"]').click();
   $('input[name="highlight_style"][value="' + rssConf.highlighting + '"]').click();
@@ -283,7 +288,7 @@ function loadSettings(data) {
   $('#title-clipping').val(rssConf.clippingSettings.title);
   $('#description-clipping').val(rssConf.clippingSettings.description);
 
-  // set of offline cachine settings
+  // set of offline cache settings
   $('input[name="offline_cache"][value="' + (typeof rssConf.offlineCache !== 'undefined' ? '' + !!rssConf.offlineCache : 'true') + '"]').prop('checked', true);
 
   // set of overlay settings
