@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 var rss = (function() {
-  $(this).translate();
+  $container = $(this);
 
   // Universal _this reference
   var _this;
@@ -420,6 +420,10 @@ var rss = (function() {
   // return module
   return rss;
 })();
+
+Fliplet().then(function() {
+  $container.translate();
+});
 
 function FlipletFeed(rssConf, source, updateTime, items, uniqueName, transition, uuid) {
   this.rssUrl = source;
