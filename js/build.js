@@ -1,4 +1,6 @@
 Fliplet.Widget.instance('rss', function(data) {
+  $container = $(this);
+
   function init() {
     if (!window.rssConf) {
       window.rssConf = [];
@@ -24,7 +26,7 @@ Fliplet.Widget.instance('rss', function(data) {
   }
 
   Fliplet().then(function() {
-    $(this).translate();
+    $container.translate();
 
     init();
   });
