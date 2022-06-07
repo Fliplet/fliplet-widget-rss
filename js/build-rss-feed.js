@@ -421,10 +421,6 @@ var rss = (function() {
   return rss;
 })();
 
-Fliplet().then(function() {
-  $container.translate();
-});
-
 function FlipletFeed(rssConf, source, updateTime, items, uniqueName, transition, uuid) {
   this.rssUrl = source;
   this.updatedTime = updateTime;
