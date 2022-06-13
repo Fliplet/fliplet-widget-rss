@@ -1,7 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 var rss = (function() {
-  $(this).translate();
-
   // Universal _this reference
   var _this;
 
