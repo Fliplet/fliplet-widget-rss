@@ -1,5 +1,5 @@
 Fliplet.Widget.instance('rss', function(data) {
-  $container = $(this);
+  var $container = $(this);
 
   function init() {
     if (!window.rssConf) {
